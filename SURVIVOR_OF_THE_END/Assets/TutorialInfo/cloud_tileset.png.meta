@@ -100,8 +100,8 @@ TextureImporter:
       name: cloud_tileset_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 171
+        x: 0
+        y: 95
         width: 99
         height: 95
       alignment: 0
@@ -325,7 +325,7 @@ TextureImporter:
         width: 45
         height: 70
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -334,6 +334,50 @@ TextureImporter:
       bones: []
       spriteID: cada0487a9d1c244aab7c92391e7a1c1
       internalID: 1975305837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cloud_tileset_11
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 444
+        width: 16
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 628bfb0e1b9a9a946afc67c5a37cd76b
+      internalID: -1340148789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cloud_tileset_12
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 111
+        width: 24
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12c26e3d16e78d741ad80df7e5266fbc
+      internalID: -1822001529
       vertices: []
       indices: 
       edges: []
@@ -355,6 +399,8 @@ TextureImporter:
       cloud_tileset_0: -846213825
       cloud_tileset_1: -332684201
       cloud_tileset_10: 1975305837
+      cloud_tileset_11: -1340148789
+      cloud_tileset_12: -1822001529
       cloud_tileset_2: -1313065336
       cloud_tileset_3: -986677128
       cloud_tileset_4: 394504781
