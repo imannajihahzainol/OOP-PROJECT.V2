@@ -1,4 +1,3 @@
 repository "SURVIVOR_OF_THE_END/SURVIVOR_OF_THE_END@18968332222983@cloud"
   path "/"
-    br "/main"
-    co "/main"
+    smartbranch "/main"
