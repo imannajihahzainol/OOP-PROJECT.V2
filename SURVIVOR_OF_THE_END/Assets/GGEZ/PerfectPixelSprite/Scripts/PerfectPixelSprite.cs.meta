@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: b035153e3314f45b0a57e562a1a379de
+timeCreated: 1520113372
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112908
+  packageName: Perfect Pixel Sprite by GG EZ
+  packageVersion: 1.0
+  assetPath: Assets/GGEZ/PerfectPixelSprite/Scripts/PerfectPixelSprite.cs
+  uploadId: 722807
