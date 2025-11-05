@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:SURVIVOR_OF_THE_END/Assets/scenelevel1/images/Title Page (3).png.meta
 guid: f54988627c05f794e9a262fadc8f7e25
+========
+guid: 0c48813c5f1555d4c86969a9a82da592
+>>>>>>>> aedfeb485944173062c07edcbd04e696574f93d2:SURVIVOR_OF_THE_END/Assets/Cave Platformer Tileset/Enviroment sprite sheets/unnamed.jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,6 +101,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+<<<<<<<< HEAD:SURVIVOR_OF_THE_END/Assets/scenelevel1/images/Title Page (3).png.meta
       name: Title Page (3)_0
       rect:
         serializedVersion: 2
@@ -104,6 +109,15 @@ TextureImporter:
         y: 323
         width: 559
         height: 596
+========
+      name: unnamed_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 585
+>>>>>>>> aedfeb485944173062c07edcbd04e696574f93d2:SURVIVOR_OF_THE_END/Assets/Cave Platformer Tileset/Enviroment sprite sheets/unnamed.jpg.meta
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +126,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<<< HEAD:SURVIVOR_OF_THE_END/Assets/scenelevel1/images/Title Page (3).png.meta
       spriteID: f959653e05aba7a49b8d0f41d9fcb279
       internalID: 570041563
+========
+      spriteID: 323c7c44208d01049a5e23ec637fcf82
+      internalID: 877891262
+>>>>>>>> aedfeb485944173062c07edcbd04e696574f93d2:SURVIVOR_OF_THE_END/Assets/Cave Platformer Tileset/Enviroment sprite sheets/unnamed.jpg.meta
       vertices: []
       indices: 
       edges: []
@@ -122,7 +141,11 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
+<<<<<<<< HEAD:SURVIVOR_OF_THE_END/Assets/scenelevel1/images/Title Page (3).png.meta
     spriteID: bd53047306005214bbe2cdae0fe06837
+========
+    spriteID: 773643a39bdb1df43881ce058d6d51b2
+>>>>>>>> aedfeb485944173062c07edcbd04e696574f93d2:SURVIVOR_OF_THE_END/Assets/Cave Platformer Tileset/Enviroment sprite sheets/unnamed.jpg.meta
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +157,11 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+<<<<<<<< HEAD:SURVIVOR_OF_THE_END/Assets/scenelevel1/images/Title Page (3).png.meta
       Title Page (3)_0: 570041563
+========
+      unnamed_0: 877891262
+>>>>>>>> aedfeb485944173062c07edcbd04e696574f93d2:SURVIVOR_OF_THE_END/Assets/Cave Platformer Tileset/Enviroment sprite sheets/unnamed.jpg.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

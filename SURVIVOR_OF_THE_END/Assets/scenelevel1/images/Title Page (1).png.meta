@@ -1,5 +1,16 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:SURVIVOR_OF_THE_END/Assets/scenelevel1/images/Title Page (1).png.meta
 guid: d8dc671fabe78f24da7c351ec9c82f60
+========
+guid: d9b31ebd60af68c469212c1a9f513e74
+AssetOrigin:
+  serializedVersion: 1
+  productId: 104606
+  packageName: Dynamic Space Background Lite
+  packageVersion: 1.1
+  assetPath: Assets/DinV/Dynamic Space Background/Sprites/Nebula Aqua-Pink.png
+  uploadId: 223798
+>>>>>>>> aedfeb485944173062c07edcbd04e696574f93d2:SURVIVOR_OF_THE_END/Assets/DinV/Dynamic Space Background/Sprites/Nebula Aqua-Pink.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -79,7 +90,7 @@ TextureImporter:
     overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
@@ -92,7 +103,7 @@ TextureImporter:
     overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
