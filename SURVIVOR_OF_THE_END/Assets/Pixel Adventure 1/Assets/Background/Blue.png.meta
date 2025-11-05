@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/Pixel Adventure 1/Assets/Background/Blue.png.meta
 guid: 8049ea91a9d5fca4dab4024c0915dbe6
+========
+guid: 543fff9c6bee69649a543666c301ca86
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/PlatformerSet1/01 background.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -31,7 +35,11 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/Pixel Adventure 1/Assets/Background/Blue.png.meta
     filterMode: 0
+========
+    filterMode: -1
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/PlatformerSet1/01 background.png.meta
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -70,6 +78,7 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/Pixel Adventure 1/Assets/Background/Blue.png.meta
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
@@ -82,6 +91,8 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+========
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/PlatformerSet1/01 background.png.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []
@@ -103,8 +114,16 @@ TextureImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/Pixel Adventure 1/Assets/Background/Blue.png.meta
   productId: 155360
   packageName: Pixel Adventure 1
   packageVersion: 1.0
   assetPath: Assets/Pixel Adventure 1/Assets/Background/Blue.png
   uploadId: 332803
+========
+  productId: 150023
+  packageName: Platformer Set1
+  packageVersion: 1.0
+  assetPath: Assets/PlatformerSet1/01 background.png
+  uploadId: 319166
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/PlatformerSet1/01 background.png.meta

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/Animations.meta
 guid: eceb15fc83d4b2347b7ef654ee3a088f
+========
+guid: 9edc9a0912b514f4e96366ca9b1aab9f
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/Cainos/Common/Texture.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
