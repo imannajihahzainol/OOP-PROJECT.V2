@@ -1,3 +1,4 @@
+using Assembly_CSharp;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -202,4 +203,62 @@ public class PlayerMovement : MonoBehaviour
             Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, false);
         }
     }
+    public void PickUpItem(Item item)
+    {
+        if (item == null) return;
+
+        // Mark item as collected
+        item.Collect();
+
+        Debug.Log("Picked up: " + item.itemName);
+    }
+    public void ApplyItemEffect(Item item)
+    {
+        if (item == null) return;
+
+        // If the item is a potion, apply potion effect
+        if (item is Potion potion)
+        {
+            potion.ApplyEffect(this);
+            Debug.Log("Applied potion effect: " + item.itemName);
+        }
+        // If the item is a weapon — you will add logic here later
+        else if (item is Weapons weapon)
+        {
+            weapon.Use(this);
+            Debug.Log("Equipped weapon: " + item.itemName);
+        }
+    }
+
+    public int health = 100;
+    public float speed = 5f;
+    public bool isImmune = false;
+    public float size = 1f;
+
+    public void Heal(int amount)
+    {
+        health += amount;
+        if (health > 100) health = 100;
+        Debug.Log("Player Healed: " + health);
+    }
+
+    public void IncreaseSpeed(float amount)
+    {
+        speed += amount;
+        Debug.Log("Player Speed Increased: " + speed);
+    }
+
+    public void IncreaseSize(float amount)
+    {
+        size += amount;
+        transform.localScale += new Vector3(amount, amount, 0);
+        Debug.Log("Player Size Increased: " + transform.localScale);
+    }
+
+    public void SetImmunity(bool value)
+    {
+        isImmune = value;
+        Debug.Log("Player Immunity: " + isImmune);
+    }
+
 }
