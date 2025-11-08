@@ -1,19 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections.Generic; // Added for completeness
+using System.Collections.Generic; 
 
 namespace Assembly_CSharp
 {
-    // --- ITEM BASE CLASS ---
-    // Note: All custom constructors have been removed.
-    // Initialization must happen in Initialize() or via Unity Inspector.
     public class Item : MonoBehaviour
     {
         [Header("Item Data")]
         public string itemName;
         public string itemType;
-        public bool isCollected = false; // Default to false
-
-        // Placeholder for initialization, can be called by subclasses
+        public bool isCollected = false; 
         protected virtual void Initialize(string name, string type)
         {
             itemName = name;
@@ -32,10 +27,6 @@ namespace Assembly_CSharp
 
             player.PickUpItem(this);
             player.ApplyItemEffect(this);
-
-            // Item is consumed upon use (depending on game rules)
-            // If the item should be destroyed, this is usually handled by the Player
-            // or by the ApplyItemEffect logic. For now, we'll just set collected to false.
             isCollected = false;
         }
 
@@ -45,20 +36,18 @@ namespace Assembly_CSharp
         }
     }
 
-    // --- CHEST CLASS ---
-    public class Chest : MonoBehaviour // Added MonoBehaviour since it's a scene object
+    public class Chest : MonoBehaviour 
     {
         public bool hasKey = false;
         public bool isOpened = false;
 
-        // Custom constructor removed. Rely on Inspector or Awake.
 
         public void OpenChest()
         {
             if (hasKey)
             {
                 isOpened = true;
-                // Logic to spawn item here
+              
             }
         }
 
@@ -67,13 +56,8 @@ namespace Assembly_CSharp
             hasKey = false;
         }
     }
-
-    // --- POTION HIERARCHY ---
-    // This must now be an Abstract class OR a component base class. 
-    // We'll keep it as a base component for specific potions.
     public abstract class Potion : Item
     {
-        // Potion initialization: set the type
         protected override void Initialize(string name, string type = "Potion")
         {
             base.Initialize(name, type);
@@ -114,7 +98,6 @@ namespace Assembly_CSharp
         public override void ApplyEffect(PlayerMovement player)
         {
             if (player == null) return;
-            // Note: I used 'immunityDuration' from the public field here.
             player.SetImmunity(true, immunityDuration);
         }
     }
@@ -150,11 +133,8 @@ namespace Assembly_CSharp
             player.Heal(healAmount);
         }
     }
-
-    // --- WEAPONS HIERARCHY ---
     public abstract class Weapons : Item
     {
-        // Weapons initialization: set the type
         protected override void Initialize(string name, string type = "Weapon")
         {
             base.Initialize(name, type);
@@ -164,9 +144,6 @@ namespace Assembly_CSharp
 
         public virtual void Equip(PlayerMovement player)
         {
-            // The GameManager or PlayerMovement should handle the reference, not the base class.
-            // We'll change this to reference the PlayerMovement directly.
-            // Assuming currentWeapon is now public in PlayerMovement for simplicity in this structure.
             player.currentWeapon = this;
             Debug.Log($"Equipped weapon: {itemName}");
         }
@@ -175,7 +152,7 @@ namespace Assembly_CSharp
     public class Sword : Weapons
     {
         public float slashSpeed = 1.0f;
-        public int swordDamage = 50; // Added for clarity
+        public int swordDamage = 50; 
 
         protected void Awake()
         {
@@ -201,13 +178,11 @@ namespace Assembly_CSharp
         {
             Slash(target);
         }
-
     }
-
     public class Gun : Weapons
     {
         public int bullets = 6;
-        public int gunDamage = 50; // Added for clarity
+        public int gunDamage = 50;  
         public ParticleSystem muzzleFlash;
         public AudioSource shootSound;
 

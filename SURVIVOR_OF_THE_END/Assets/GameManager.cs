@@ -1,16 +1,19 @@
-﻿using UnityEngine.InputSystem;
-using UnityEngine;
-using System.Collections.Generic;
+﻿using Assembly_CSharp;
 using System;
+using System.Collections.Generic;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class GameManager : MonoBehaviour
     {
-        public static GameManager Instance { get; private set; }
+    public Weapons currentWeapon;
+
+    public static GameManager Instance { get; private set; }
 
         public int currentLevel;
         public bool isGameOver;

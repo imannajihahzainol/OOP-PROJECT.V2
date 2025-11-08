@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Weapons currentWeapon;
     public Transform respawnPoint;
 
     [Header("Player Stats")]
@@ -228,6 +229,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     public int health = 100;
     public float speed = 5f;
     public bool isImmune = false;
@@ -288,15 +290,7 @@ public class PlayerMovement : MonoBehaviour
         isImmune = false;
         Debug.Log("Player Immunity expired!");
     }
-    public virtual void Equip(PlayerMovement player)
-    {
-        equippedPlayer = player;
-    }
-
-    public virtual void Unequip()
-    {
-        equippedPlayer = null;
-    }
+   
 
 
 }
