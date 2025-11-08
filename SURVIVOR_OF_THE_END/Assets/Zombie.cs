@@ -6,45 +6,96 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using UnityEngine;
 
-namespace Assets
+using UnityEngine;
+
+public class Zombie : MonoBehaviour
 {
-    public class Zombie : MonoBehaviour
+    [Header("Zombie Stats")]
+    public int speed = 1;
+    public int health = 100;
+    public int damage = 10;
+
+    [Header("Attack Settings")]
+    public float attackRange = 1.5f;
+    public float attackCooldown = 1.5f;
+
+    [Header("Ground Detection")]
+    public Transform groundCheck;
+    public float groundCheckDistance = 0.2f;
+    public LayerMask groundLayer;
+    protected bool isGrounded;
+
+    protected Transform player;
+    protected PlayerMovement playerScript;
+    private float lastAttackTime = 0f;
+
+    protected virtual void Start()
     {
-        public int speed = 1;
-        public int health = 100;
-        public int damage = 10;
-
-        // Base movement for normal zombies
-        public virtual void ChasePlayer(Transform player)
+        // Find player automatically
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
         {
-            if (player == null) return;
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            player = playerObj.transform;
+            playerScript = playerObj.GetComponent<PlayerMovement>();
         }
+    }
 
-        // Basic attack (for now, just display log)
-        public virtual void AttackPlayer()
+    // Base chase behavior (can be overridden)
+    public virtual void ChasePlayer(Transform player)
+    {
+        if (player == null || !isGrounded) return;
+
+        // Move horizontally toward player (no flying through ground!)
+        Vector2 target = new Vector2(player.position.x, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+
+        // Flip to face player
+        if (player.position.x > transform.position.x)
+            transform.localScale = new Vector3(1, 1, 1);
+        else
+            transform.localScale = new Vector3(-1, 1, 1);
+    }
+
+    // Base attack logic
+    public virtual void AttackPlayer()
+    {
+        if (playerScript == null || player == null) return;
+
+        float distance = Vector2.Distance(transform.position, player.position);
+        if (distance <= attackRange && Time.time - lastAttackTime >= attackCooldown)
         {
             Debug.Log(name + " attacks player for " + damage + " damage!");
+            playerScript.takeDamage(damage);
+            lastAttackTime = Time.time;
         }
-
-        // Take damage and check if dead
-        public virtual void TakeDamage(int amount)
-        {
-            health -= amount;
-            Debug.Log(name + " took " + amount + " damage. Remaining health: " + health);
-
-            if (IsDead())
-            {
-                Debug.Log(name + " is dead!");
-                Destroy(gameObject); // remove from scene
-            }
-        }
-
-        // Check if zombie health reaches 0
-        public virtual bool IsDead()
-        {
-            return health <= 0;
-        }
-
     }
+
+    // Damage handling
+    public virtual void TakeDamage(int amount)
+    {
+        health -= amount;
+        Debug.Log(name + " took " + amount + " damage. Remaining health: " + health);
+
+        if (IsDead()) Die();
+    }
+
+    public virtual bool IsDead() => health <= 0;
+
+    protected virtual void Die()
+    {
+        Debug.Log(name + " is dead!");
+        Destroy(gameObject);
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        CheckGround();
+    }
+
+    protected void CheckGround()
+    {
+        if (groundCheck != null)
+            isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+    }
+  
 }

@@ -1,74 +1,113 @@
-﻿using System;
+﻿using UnityEngine.InputSystem;
+using UnityEngine;
+using System.Collections.Generic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets
-{
-    public class GameManager
+
+public class GameManager : MonoBehaviour
     {
-        public int currentLevel { get; private set; }
-        public bool isGameOver { get; private set; }
+        public static GameManager Instance { get; private set; }
+
+        public int currentLevel;
+        public bool isGameOver;
 
         public List<Level> levels = new List<Level>();
 
-        public GameManager()
+        private void Awake()
         {
-            currentLevel = 1;
-            isGameOver = false;
+            // Ensure only one GameManager exists (Singleton Pattern)
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
-        public void startGame()
+        private void Start()
+        {
+            StartGame();
+        }
+
+        // Start the game from level 1
+        public void StartGame()
         {
             isGameOver = false;
             currentLevel = 1;
 
-            Console.WriteLine("Game Started!");
-            levels[currentLevel - 1].restartLevel();
+            Debug.Log("Game Started!");
+
+            if (levels.Count > 0)
+            {
+                levels[currentLevel - 1].RestartLevel();
+            }
+            else
+            {
+                Debug.LogWarning("No levels assigned to GameManager!");
+            }
         }
 
+        // End the game
         public void endGame()
         {
             isGameOver = true;
-            Console.WriteLine("Game Over!");
+            Debug.Log("Game Over!");
         }
 
+        // Proceed to next level
         public void nextLevel()
         {
             if (isGameOver)
             {
-                Console.WriteLine("Cannot continue. Game is already over.");
+                Debug.Log("Cannot continue. Game is already over.");
                 return;
             }
 
-            // mark current level complete
-            levels[currentLevel - 1].completeLevel();
+            if (levels.Count == 0)
+            {
+                Debug.LogWarning("No levels assigned to GameManager!");
+                return;
+            }
 
+            levels[currentLevel - 1].CompleteLevel();
             currentLevel++;
 
             if (currentLevel > levels.Count)
             {
-                Console.WriteLine("Congratulations! All levels completed.");
+                Debug.Log("Congratulations! All levels completed.");
                 endGame();
             }
             else
             {
-                Console.WriteLine("Proceeding to Level " + currentLevel);
-                levels[currentLevel - 1].restartLevel();
+                Debug.Log($"Proceeding to Level {currentLevel}");
+                levels[currentLevel - 1].RestartLevel();
             }
         }
 
+        // Restart current level
         public void RestartLevel()
         {
             if (isGameOver)
             {
-                Console.WriteLine("Cannot restart. Game is over.");
+                Debug.Log("Cannot restart. Game is over.");
                 return;
             }
 
-            Console.WriteLine("Restarting Level " + currentLevel);
-            levels[currentLevel - 1].restartLevel();
+            if (levels.Count == 0)
+            {
+                Debug.LogWarning("No levels assigned to GameManager!");
+                return;
+            }
+
+            Debug.Log($"Restarting Level {currentLevel}");
+            levels[currentLevel - 1].RestartLevel();
         }
-    }
+    
 }

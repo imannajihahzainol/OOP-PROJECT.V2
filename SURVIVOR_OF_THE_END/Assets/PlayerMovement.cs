@@ -216,17 +216,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (item == null) return;
 
-        // If the item is a potion, apply potion effect
         if (item is Potion potion)
         {
             potion.ApplyEffect(this);
-            Debug.Log("Applied potion effect: " + item.itemName);
+            Debug.Log($"Applied potion effect: {item.itemName}");
         }
-        // If the item is a weapon — you will add logic here later
         else if (item is Weapons weapon)
         {
-            weapon.Use(this);
-            Debug.Log("Equipped weapon: " + item.itemName);
+            weapon.Equip(this);
+            Debug.Log($"Equipped weapon: {item.itemName}");
         }
     }
 
@@ -247,6 +245,18 @@ public class PlayerMovement : MonoBehaviour
         speed += amount;
         Debug.Log("Player Speed Increased: " + speed);
     }
+    public void IncreaseJump(float amount)
+    {
+        jumpForce += amount;
+        Debug.Log("Player Jump Increased: " + jumpForce);
+    }
+
+    public void IncreaseDamage(float amount)
+    {
+        // You can later connect this to your attack system.
+        Debug.Log("Player Damage Increased by: " + amount);
+    }
+
 
     public void IncreaseSize(float amount)
     {
@@ -255,10 +265,38 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Player Size Increased: " + transform.localScale);
     }
 
-    public void SetImmunity(bool value)
+    public void SetImmunity(bool value, float duration = 0f)
     {
-        isImmune = value;
-        Debug.Log("Player Immunity: " + isImmune);
+        if (value)
+        {
+            isImmune = true;
+            Debug.Log("Player Immunity: ON");
+
+            // If duration > 0, start a coroutine to turn it off later
+            if (duration > 0)
+                StartCoroutine(RemoveImmunityAfterDelay(duration));
+        }
+        else
+        {
+            isImmune = false;
+            Debug.Log("Player Immunity: OFF");
+        }
     }
+    private System.Collections.IEnumerator RemoveImmunityAfterDelay(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        isImmune = false;
+        Debug.Log("Player Immunity expired!");
+    }
+    public virtual void Equip(PlayerMovement player)
+    {
+        equippedPlayer = player;
+    }
+
+    public virtual void Unequip()
+    {
+        equippedPlayer = null;
+    }
+
 
 }
