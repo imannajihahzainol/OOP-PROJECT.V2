@@ -1,4 +1,7 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:SURVIVOR_OF_THE_END/Assets/scenelevel1/images/Title Page.png.meta
+guid: 904e6fe093c78254689c297e8270057e
+========
 guid: c6944f9f15bd0ca4087bcdf033f0e162
 AssetOrigin:
   serializedVersion: 1
@@ -7,6 +10,7 @@ AssetOrigin:
   packageVersion: 1.1
   assetPath: Assets/DinV/Dynamic Space Background/Sprites/Stars-Big_1.png
   uploadId: 223798
+>>>>>>>> aedfeb485944173062c07edcbd04e696574f93d2:SURVIVOR_OF_THE_END/Assets/DinV/Dynamic Space Background/Sprites/Stars-Big_1.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -50,7 +54,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,9 +74,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -128,12 +132,34 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Title Page_0
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 256
+        width: 743
+        height: 556
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82cdfb1d237fd2944aaf617995df843f
+      internalID: 38825991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 1350bedcb7c6d564baec3e21611e6a79
     internalID: 0
     vertices: []
     indices: 
@@ -141,8 +167,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Title Page_0: 38825991
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

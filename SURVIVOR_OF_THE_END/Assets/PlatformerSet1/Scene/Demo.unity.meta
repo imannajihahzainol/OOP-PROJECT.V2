@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/Pixel Adventure 1/Scenes/Demo.unity.meta
+guid: b3cd4186a350efa4db88cef81822662b
+========
+guid: 5afe6894a41ae674bb9f35073d2f3175
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/PlatformerSet1/Scene/Demo.unity.meta
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/Pixel Adventure 1/Scenes/Demo.unity.meta
+  productId: 155360
+  packageName: Pixel Adventure 1
+  packageVersion: 1.0
+  assetPath: Assets/Pixel Adventure 1/Scenes/Demo.unity
+  uploadId: 332803
+========
+  productId: 150023
+  packageName: Platformer Set1
+  packageVersion: 1.0
+  assetPath: Assets/PlatformerSet1/Scene/Demo.unity
+  uploadId: 319166
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/PlatformerSet1/Scene/Demo.unity.meta

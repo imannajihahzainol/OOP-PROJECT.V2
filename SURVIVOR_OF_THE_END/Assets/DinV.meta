@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:SURVIVOR_OF_THE_END/Assets/karsiori/Sprites/Pixel Art Key Pack - Animated/Key 1/Materials/Key 1 - GOLD - .mat.meta
+guid: 44f8be82d060b62459d345216224bd24
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+========
 guid: 8e832f503bcb84262abe55325d1cb597
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
+>>>>>>>> aedfeb485944173062c07edcbd04e696574f93d2:SURVIVOR_OF_THE_END/Assets/DinV.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

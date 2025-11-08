@@ -1,4 +1,7 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:SURVIVOR_OF_THE_END/Assets/scenelevel1/images/Title Page (1).png.meta
+guid: 37c37606ed7a05f45b8c7d389ee33920
+========
 guid: d9b31ebd60af68c469212c1a9f513e74
 AssetOrigin:
   serializedVersion: 1
@@ -7,6 +10,7 @@ AssetOrigin:
   packageVersion: 1.1
   assetPath: Assets/DinV/Dynamic Space Background/Sprites/Nebula Aqua-Pink.png
   uploadId: 223798
+>>>>>>>> aedfeb485944173062c07edcbd04e696574f93d2:SURVIVOR_OF_THE_END/Assets/DinV/Dynamic Space Background/Sprites/Nebula Aqua-Pink.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,11 +50,11 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,9 +74,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -102,12 +106,34 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Title Page (1)_0
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 314
+        width: 583
+        height: 479
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2faca5fbd89de9744be2a96821891981
+      internalID: 1887281905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 519b637945d0ecf46a0ca89e3d59e7c4
     internalID: 0
     vertices: []
     indices: 
@@ -115,8 +141,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Title Page (1)_0: 1887281905
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

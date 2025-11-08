@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/CrystalWorld/Scene.meta
 guid: de729e5b0d507d84ba33e462e37fb840
+========
+guid: beb4ccb91a6241c4ebb130252e879892
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/PlatformerSet1/Scene.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

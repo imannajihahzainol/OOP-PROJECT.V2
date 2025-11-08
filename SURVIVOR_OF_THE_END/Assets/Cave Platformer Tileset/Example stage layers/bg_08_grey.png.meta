@@ -109,8 +109,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 232
-        width: 352
-        height: 232
+        width: 347
+        height: 288
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: bg_08_grey_1
       rect:
         serializedVersion: 2
-        x: 352
+        x: 349
         y: 232
-        width: 352
-        height: 232
+        width: 355
+        height: 289
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -1,9 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/assets aly yuni/platformer/Individual PNG files/Tileset/assets aly yuni/platformer/TILED_files/shinies.png.meta
 guid: 62d8f8166ea9b414e8fb76677a7c7dde
+========
+guid: 15bb35baa127c2e4d9430057b3ee55a7
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/karsiori/Props/Barrel.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 13
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -72,7 +76,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -82,6 +86,32 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -115,3 +145,13 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/assets aly yuni/platformer/Individual PNG files/Tileset/assets aly yuni/platformer/TILED_files/shinies.png.meta
+========
+AssetOrigin:
+  serializedVersion: 1
+  productId: 309119
+  packageName: Pixel Art Mountains Tileset and Backgrounds
+  packageVersion: 1.1
+  assetPath: Assets/karsiori/Props/Barrel.png
+  uploadId: 776665
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/karsiori/Props/Barrel.png.meta

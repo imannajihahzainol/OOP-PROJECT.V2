@@ -1,10 +1,19 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: e823b8bcc46e5c34cba7fa4a58a2e35d
+=======
+<<<<<<<< Updated upstream:SURVIVOR_OF_THE_END/Assets/Scenes/SCENE2.unity.meta
+guid: 227a9c9718376f241b86e49554d31d55
+========
+guid: 0cfc0f37b5256004fa9a4f122857c46e
+>>>>>>>> Stashed changes:SURVIVOR_OF_THE_END/Assets/karsiori/Scenes/karsiori - Mountains Tileset and Backgrounds Demo Scene.unity.meta
+>>>>>>> Stashed changes
 DefaultImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< Updated upstream
 AssetOrigin:
   serializedVersion: 1
   productId: 309119
@@ -13,3 +22,5 @@ AssetOrigin:
   assetPath: Assets/karsiori/Scenes/karsiori - Mountains Tileset and Backgrounds
     Demo Scene.unity
   uploadId: 776665
+=======
+>>>>>>> Stashed changes

@@ -5,7 +5,7 @@ AssetOrigin:
   productId: 61672
   packageName: 2D Platfrom Tile Set - Cave
   packageVersion: 1.2
-  assetPath: Assets/Cave Platformer Tileset/Individual PNG files/Tileset/water_animated/water_animated_1.png
+  assetPath: Assets/assets aly yuni/platformer/Individual PNG files/Tileset/water_animated/water_animated_1.png
   uploadId: 154679
 TextureImporter:
   internalIDToNameTable: []
@@ -60,7 +60,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -103,16 +103,12 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: 2, y: -7}
-      - {x: 13, y: -7}
-      - {x: 13, y: -2}
-      - {x: 2, y: -2}
+    outline: []
     customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
