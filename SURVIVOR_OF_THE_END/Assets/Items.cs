@@ -35,27 +35,6 @@ namespace Assembly_CSharp
             isCollected = false;
         }
     }
-
-    public class Chest : MonoBehaviour 
-    {
-        public bool hasKey = false;
-        public bool isOpened = false;
-
-
-        public void OpenChest()
-        {
-            if (hasKey)
-            {
-                isOpened = true;
-              
-            }
-        }
-
-        public void GiveKey()
-        {
-            hasKey = false;
-        }
-    }
     public abstract class Potion : Item
     {
         protected override void Initialize(string name, string type = "Potion")
