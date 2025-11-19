@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (lives <= 0)
         {
-            Debug.Log("Player died!");   
+            Debug.Log("Player died!");
             Respawn();
             return;
         }
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.linearVelocity = Vector2.zero;
 
-        StartCoroutine(DamageEffects()); 
+        StartCoroutine(DamageEffects());
     }
 
     private System.Collections.IEnumerator DamageEffects()
@@ -202,6 +202,12 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = originalGravity;
 
             Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, false);
+        }
+        // Water Respawn
+        if (collision.CompareTag("Water"))
+        {
+            Debug.Log("Player fell into water!");
+            Respawn();
         }
     }
     public void PickUpItem(Item item)
@@ -290,7 +296,9 @@ public class PlayerMovement : MonoBehaviour
         isImmune = false;
         Debug.Log("Player Immunity expired!");
     }
-   
+
 
 
 }
+
+
