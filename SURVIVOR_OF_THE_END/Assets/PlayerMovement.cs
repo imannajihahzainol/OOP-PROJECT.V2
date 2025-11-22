@@ -7,22 +7,31 @@ public class PlayerMovement : MonoBehaviour
     public Weapons currentWeapon;
     public Transform respawnPoint;
 
+    // ---------------- PLAYER STATS ----------------
     [Header("Player Stats")]
     public int lives = 3;
+    public int health = 100;
 
+    [Header("Immunity")]
+    public bool isImmune = false;        // Potion immunity (for slime only)
+    public float immunityTimer = 0f;
+
+    // ---------------- DAMAGE SYSTEM ----------------
     [Header("Damage Settings")]
-    public float invincibilityDuration = 1f;
+    public float invincibilityDuration = 1f; // i-frames after taking damage
     public float knockbackForce = 5f;
     public float flashSpeed = 0.1f;
 
-    private bool isInvincible = false;
+    private bool isInvincible = false;     // i-frame system
     private SpriteRenderer spriteRenderer;
 
+    // ---------------- MOVEMENT ----------------
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     public float climbSpeed = 3f;
 
+    // ---------------- GROUND CHECK ----------------
     [Header("Ground Check Settings")]
     public Transform groundCheck;
     public float checkRadius = 0.2f;
@@ -41,18 +50,16 @@ public class PlayerMovement : MonoBehaviour
     private int groundLayer;
     private int playerLayer;
 
+    // -------------------------------------------------------------
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        originalGravity = rb.gravityScale;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalGravity = rb.gravityScale;
 
         controls = new PlayerControls();
-
-        // Input Bindings
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-
         controls.Player.Jump.performed += ctx => jump();
         controls.Player.Attack.performed += ctx => attack();
 
@@ -63,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
     void OnEnable() => controls.Player.Enable();
     void OnDisable() => controls.Player.Disable();
 
+    // -------------------------------------------------------------
+    // BASIC MOVEMENT
     public void moveLeft()
     {
         rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
@@ -83,23 +92,32 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // -------------------------------------------------------------
+    // ATTACK
     public void attack()
     {
         if (isAttacking) return;
 
         isAttacking = true;
         Debug.Log("Player Attacked!");
-
         Invoke(nameof(_resetAttack), 0.5f);
     }
 
     private void _resetAttack() => isAttacking = false;
 
-
-    // Take Damage
+    // -------------------------------------------------------------
+    // UNIVERSAL DAMAGE FUNCTION
     public void takeDamage(int amount)
     {
-        if (isInvincible) return; // ignore damage during i-frames
+        // Block only slime damage through the immune potion
+        if (isImmune)
+        {
+            Debug.Log("Player is immune! Slime damage blocked.");
+            return;
+        }
+
+        // Normal i-frame invincibility still works
+        if (isInvincible) return;
 
         lives -= amount;
         Debug.Log("Player took damage! Lives left: " + lives);
@@ -110,30 +128,43 @@ public class PlayerMovement : MonoBehaviour
             Respawn();
             return;
         }
+
         StartCoroutine(DamageEffects());
     }
 
-    // Respawn Player
+
+    // -------------------------------------------------------------
+    // SPECIAL SLIME DAMAGE FUNCTION (uses isImmune)
+    public void TakeSlimeDamage(int amount)
+    {
+        if (isImmune)
+        {
+            Debug.Log("Slime damage ignored (IMMUNE!)");
+            return;
+        }
+        takeDamage(amount);
+    }
+
+
+    // -------------------------------------------------------------
+    // RESPAWN SYSTEM
     private void Respawn()
     {
-        lives = 3; // Reset lives
-
+        lives = 3;
         transform.position = respawnPoint.position;
-
         rb.linearVelocity = Vector2.zero;
-
         StartCoroutine(DamageEffects());
     }
 
+    // -------------------------------------------------------------
+    // DAMAGE EFFECTS / I-FRAMES
     private System.Collections.IEnumerator DamageEffects()
     {
         isInvincible = true;
 
-        // Knockback 
         float direction = transform.localScale.x > 0 ? -1 : 1;
         rb.linearVelocity = new Vector2(direction * knockbackForce, rb.linearVelocity.y);
 
-        // Flashing effect
         for (float i = 0; i < invincibilityDuration; i += flashSpeed * 2)
         {
             spriteRenderer.enabled = false;
@@ -145,52 +176,63 @@ public class PlayerMovement : MonoBehaviour
         isInvincible = false;
     }
 
-    void FixedUpdate()
-    {
-        HandleMovement();
-    }
+    // -------------------------------------------------------------
+    void FixedUpdate() => HandleMovement();
 
     private void HandleMovement()
     {
-        // Ladder climbing
+        // LADDER
         if (isOnLadder && Mathf.Abs(moveInput.y) > 0.1f)
         {
             isClimbing = true;
             rb.gravityScale = 0f;
             rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, moveInput.y * climbSpeed);
-
             Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, true);
             return;
         }
 
-        // On ladder but idle
         if (isClimbing && isOnLadder)
         {
             rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, 0f);
             return;
         }
 
-        // Normal movement
+        // NORMAL
         isClimbing = false;
         rb.gravityScale = originalGravity;
 
         Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, false);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
-        // Choose correct UML method
-        if (moveInput.x > 0.1f)
-            moveRight();
-        else if (moveInput.x < -0.1f)
-            moveLeft();
-        else
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        if (moveInput.x > 0.1f) moveRight();
+        else if (moveInput.x < -0.1f) moveLeft();
+        else rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+
+        // IMMUNITY TIMER UPDATE
+        if (isImmune)
+        {
+            immunityTimer -= Time.deltaTime;
+            if (immunityTimer <= 0)
+            {
+                isImmune = false;
+                Debug.Log("Immunity expired.");
+            }
+        }
     }
 
-    // Ladder Triggers
+    // -------------------------------------------------------------
+    // TRIGGERS
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
             isOnLadder = true;
+
+        // WATER ALWAYS KILLS
+        if (collision.CompareTag("Water"))
+        {
+            Debug.Log("Player fell into water!");
+            Respawn();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -200,105 +242,65 @@ public class PlayerMovement : MonoBehaviour
             isOnLadder = false;
             isClimbing = false;
             rb.gravityScale = originalGravity;
-
             Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, false);
         }
-        // Water Respawn
-        if (collision.CompareTag("Water"))
-        {
-            Debug.Log("Player fell into water!");
-            Respawn();
-        }
     }
+
+    // -------------------------------------------------------------
+    // ITEM SYSTEM
     public void PickUpItem(Item item)
     {
-        if (item == null) return;
-
-        // Mark item as collected
-        item.Collect();
-
-        Debug.Log("Picked up: " + item.itemName);
+        if (item != null)
+            Debug.Log("Picked up: " + item.itemName);
     }
+
     public void ApplyItemEffect(Item item)
     {
-        if (item == null) return;
-
         if (item is Potion potion)
         {
             potion.ApplyEffect(this);
-            Debug.Log($"Applied potion effect: {item.itemName}");
         }
         else if (item is Weapons weapon)
         {
             weapon.Equip(this);
-            Debug.Log($"Equipped weapon: {item.itemName}");
         }
     }
 
-
-    public int health = 100;
-    public float speed = 5f;
-    public bool isImmune = false;
-    public float size = 1f;
-
+    // POTION EFFECTS --------------------------------
     public void Heal(int amount)
     {
-        health += amount;
-        if (health > 100) health = 100;
+        health = Mathf.Min(100, health + amount);
         Debug.Log("Player Healed: " + health);
     }
 
     public void IncreaseSpeed(float amount)
     {
-        speed += amount;
-        Debug.Log("Player Speed Increased: " + speed);
+        moveSpeed += amount;
+        Debug.Log("Speed Increased: " + moveSpeed);
     }
+
     public void IncreaseJump(float amount)
     {
         jumpForce += amount;
-        Debug.Log("Player Jump Increased: " + jumpForce);
+        Debug.Log("Jump Increased: " + jumpForce);
     }
-
-    public void IncreaseDamage(float amount)
-    {
-        // You can later connect this to your attack system.
-        Debug.Log("Player Damage Increased by: " + amount);
-    }
-
 
     public void IncreaseSize(float amount)
     {
-        size += amount;
         transform.localScale += new Vector3(amount, amount, 0);
-        Debug.Log("Player Size Increased: " + transform.localScale);
+        Debug.Log("Player Size Increased");
     }
 
-    public void SetImmunity(bool value, float duration = 0f)
+    // IMMUNITY EFFECT
+    public void SetImmunity(bool value, float duration)
     {
+        isImmune = value;
+
         if (value)
         {
-            isImmune = true;
-            Debug.Log("Player Immunity: ON");
-
-            // If duration > 0, start a coroutine to turn it off later
-            if (duration > 0)
-                StartCoroutine(RemoveImmunityAfterDelay(duration));
+            immunityTimer = duration;
+            Debug.Log("IMMUNITY ACTIVATED!");
         }
-        else
-        {
-            isImmune = false;
-            Debug.Log("Player Immunity: OFF");
-        }
+        else Debug.Log("IMMUNITY OFF");
     }
-    private System.Collections.IEnumerator RemoveImmunityAfterDelay(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        isImmune = false;
-        Debug.Log("Player Immunity expired!");
-    }
-
-
-
 }
-
-

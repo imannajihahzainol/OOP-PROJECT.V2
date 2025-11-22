@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic; 
 
 namespace Assembly_CSharp
 {
@@ -8,7 +7,8 @@ namespace Assembly_CSharp
         [Header("Item Data")]
         public string itemName;
         public string itemType;
-        public bool isCollected = false; 
+        public bool isCollected = false;
+
         protected virtual void Initialize(string name, string type)
         {
             itemName = name;
@@ -35,6 +35,9 @@ namespace Assembly_CSharp
             isCollected = false;
         }
     }
+
+    // -------------------- POTIONS --------------------
+
     public abstract class Potion : Item
     {
         protected override void Initialize(string name, string type = "Potion")
@@ -43,42 +46,6 @@ namespace Assembly_CSharp
         }
 
         public abstract void ApplyEffect(PlayerMovement player);
-    }
-
-    public class Booster : Potion
-    {
-        public float speedIncrease = 1f;
-        public float jumpIncrease = 1f;
-        public float damageIncrease = 1f;
-
-        protected void Awake()
-        {
-            Initialize("Booster Potion");
-        }
-
-        public override void ApplyEffect(PlayerMovement player)
-        {
-            if (player == null) return;
-            player.IncreaseSpeed(speedIncrease);
-            player.IncreaseJump(jumpIncrease);
-            player.IncreaseDamage(damageIncrease);
-        }
-    }
-
-    public class Immune : Potion
-    {
-        public float immunityDuration = 5f;
-
-        protected void Awake()
-        {
-            Initialize("Immunity Potion");
-        }
-
-        public override void ApplyEffect(PlayerMovement player)
-        {
-            if (player == null) return;
-            player.SetImmunity(true, immunityDuration);
-        }
     }
 
     public class SizeUp : Potion
@@ -112,6 +79,9 @@ namespace Assembly_CSharp
             player.Heal(healAmount);
         }
     }
+
+    // -------------------- WEAPONS --------------------
+
     public abstract class Weapons : Item
     {
         protected override void Initialize(string name, string type = "Weapon")
@@ -131,7 +101,7 @@ namespace Assembly_CSharp
     public class Sword : Weapons
     {
         public float slashSpeed = 1.0f;
-        public int swordDamage = 50; 
+        public int swordDamage = 50;
 
         protected void Awake()
         {
@@ -141,9 +111,7 @@ namespace Assembly_CSharp
         public void Slash(Zombie target)
         {
             if (target != null && !target.IsDead())
-            {
                 target.TakeDamage(swordDamage);
-            }
 
             Animator animator = GetComponent<Animator>();
             if (animator != null)
@@ -158,10 +126,11 @@ namespace Assembly_CSharp
             Slash(target);
         }
     }
+
     public class Gun : Weapons
     {
         public int bullets = 6;
-        public int gunDamage = 50;  
+        public int gunDamage = 50;
         public ParticleSystem muzzleFlash;
         public AudioSource shootSound;
 
@@ -173,12 +142,11 @@ namespace Assembly_CSharp
         public void Shoot(Zombie target)
         {
             if (bullets <= 0) return;
+
             bullets--;
 
             if (target != null && !target.IsDead())
-            {
                 target.TakeDamage(gunDamage);
-            }
 
             if (muzzleFlash != null) muzzleFlash.Play();
             if (shootSound != null) shootSound.Play();
