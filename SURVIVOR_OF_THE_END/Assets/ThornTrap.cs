@@ -21,6 +21,7 @@ public class ThornTrap : MonoBehaviour
             {
                 Debug.Log("Thorn Trap hit player for 1 life!");
                 player.takeDamage(damageAmount);
+                Debug.Log($"Thorn Trap triggered! Dealt {damageAmount} damage to player.");
             }
 
             Invoke(nameof(ResetDamage), damageCooldown);
