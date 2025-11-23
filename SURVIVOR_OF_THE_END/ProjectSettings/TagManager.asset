@@ -7,6 +7,7 @@ TagManager:
   - Ladder
   - Water
   - fire
+  - Slime
   layers:
   - Default
   - TransparentFX
