@@ -13,16 +13,16 @@ public class PlayerMovement : MonoBehaviour
     public int health = 100;
 
     [Header("Immunity")]
-    public bool isImmune = false;        // Potion immunity (for slime only)
+    public bool isImmune = false;
     public float immunityTimer = 0f;
 
     // ---------------- DAMAGE SYSTEM ----------------
     [Header("Damage Settings")]
-    public float invincibilityDuration = 1f; // i-frames after taking damage
+    public float invincibilityDuration = 1f;
     public float knockbackForce = 5f;
     public float flashSpeed = 0.1f;
 
-    private bool isInvincible = false;     // i-frame system
+    private bool isInvincible = false;
     private SpriteRenderer spriteRenderer;
 
     // ---------------- MOVEMENT ----------------
@@ -45,10 +45,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isAttacking;
     private bool isClimbing = false;
     private bool isOnLadder = false;
-    private float originalGravity;
 
+    private float originalGravity;
     private int groundLayer;
     private int playerLayer;
+    private Vector3 startingPosition;
 
     // -------------------------------------------------------------
     void Awake()
@@ -57,7 +58,11 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalGravity = rb.gravityScale;
 
+        startingPosition = transform.position;
+
         controls = new PlayerControls();
+
+        // Input bindings
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
         controls.Player.Jump.performed += ctx => jump();
@@ -65,10 +70,20 @@ public class PlayerMovement : MonoBehaviour
 
         groundLayer = LayerMask.NameToLayer("Ground");
         playerLayer = gameObject.layer;
+
+        lives = Mathf.Clamp(lives, 0, 3);
     }
 
-    void OnEnable() => controls.Player.Enable();
-    void OnDisable() => controls.Player.Disable();
+    // MUST be capital O, otherwise Unity does NOT call it.
+    void OnEnable()
+    {
+        controls.Player.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.Player.Disable();
+    }
 
     // -------------------------------------------------------------
     // BASIC MOVEMENT
@@ -93,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // -------------------------------------------------------------
-    // ATTACK
+    // ATTACK SYSTEM
     public void attack()
     {
         if (isAttacking) return;
@@ -103,23 +118,21 @@ public class PlayerMovement : MonoBehaviour
         Invoke(nameof(_resetAttack), 0.5f);
     }
 
-    private void _resetAttack() => isAttacking = false;
+    private void _resetAttack()
+    {
+        isAttacking = false;
+    }
 
     // -------------------------------------------------------------
-    // UNIVERSAL DAMAGE FUNCTION
+    // DAMAGE SYSTEM
     public void takeDamage(int amount)
     {
-        // Block only slime damage through the immune potion
-        if (isImmune)
-        {
-            Debug.Log("Player is immune! Slime damage blocked.");
-            return;
-        }
-
-        // Normal i-frame invincibility still works
+        if (isImmune) return;
         if (isInvincible) return;
 
         lives -= amount;
+        lives = Mathf.Clamp(lives, 0, 3);
+
         Debug.Log("Player took damage! Lives left: " + lives);
 
         if (lives <= 0)
@@ -132,32 +145,30 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(DamageEffects());
     }
 
-
-    // -------------------------------------------------------------
-    // SPECIAL SLIME DAMAGE FUNCTION (uses isImmune)
     public void TakeSlimeDamage(int amount)
     {
-        if (isImmune)
-        {
-            Debug.Log("Slime damage ignored (IMMUNE!)");
-            return;
-        }
+        if (isImmune) return;
         takeDamage(amount);
     }
-
 
     // -------------------------------------------------------------
     // RESPAWN SYSTEM
     private void Respawn()
     {
         lives = 3;
-        transform.position = respawnPoint.position;
+
+        if (respawnPoint != null)
+            transform.position = respawnPoint.position;
+        else
+            transform.position = startingPosition;
+
         rb.linearVelocity = Vector2.zero;
+
         StartCoroutine(DamageEffects());
     }
 
     // -------------------------------------------------------------
-    // DAMAGE EFFECTS / I-FRAMES
+    // DAMAGE EFFECTS
     private System.Collections.IEnumerator DamageEffects()
     {
         isInvincible = true;
@@ -177,7 +188,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // -------------------------------------------------------------
-    void FixedUpdate() => HandleMovement();
+    void FixedUpdate()
+    {
+        HandleMovement();
+    }
 
     private void HandleMovement()
     {
@@ -197,18 +211,19 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // NORMAL
+        // NORMAL MOVEMENT
         isClimbing = false;
         rb.gravityScale = originalGravity;
 
         Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, false);
+
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
         if (moveInput.x > 0.1f) moveRight();
         else if (moveInput.x < -0.1f) moveLeft();
         else rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
 
-        // IMMUNITY TIMER UPDATE
+        // IMMUNITY countdown
         if (isImmune)
         {
             immunityTimer -= Time.deltaTime;
@@ -221,13 +236,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // -------------------------------------------------------------
-    // TRIGGERS
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
             isOnLadder = true;
 
-        // WATER ALWAYS KILLS
         if (collision.CompareTag("Water"))
         {
             Debug.Log("Player fell into water!");
@@ -247,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // -------------------------------------------------------------
-    // ITEM SYSTEM
+    // ITEMS (unchanged)
     public void PickUpItem(Item item)
     {
         if (item != null)
@@ -257,16 +270,11 @@ public class PlayerMovement : MonoBehaviour
     public void ApplyItemEffect(Item item)
     {
         if (item is Potion potion)
-        {
             potion.ApplyEffect(this);
-        }
         else if (item is Weapons weapon)
-        {
             weapon.Equip(this);
-        }
     }
 
-    // POTION EFFECTS --------------------------------
     public void Heal(int amount)
     {
         health = Mathf.Min(100, health + amount);
@@ -291,7 +299,6 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Player Size Increased");
     }
 
-    // IMMUNITY EFFECT
     public void SetImmunity(bool value, float duration)
     {
         isImmune = value;
@@ -301,6 +308,9 @@ public class PlayerMovement : MonoBehaviour
             immunityTimer = duration;
             Debug.Log("IMMUNITY ACTIVATED!");
         }
-        else Debug.Log("IMMUNITY OFF");
+        else
+        {
+            Debug.Log("IMMUNITY OFF");
+        }
     }
 }
