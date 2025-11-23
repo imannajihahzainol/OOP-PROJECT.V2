@@ -1,10 +1,10 @@
 using UnityEngine;
-
 namespace Assembly_CSharp
 {
     public class TeleportPotion : Potion
     {
-        public Transform teleportTarget;
+    [Header("Teleport Settings")]
+        public Transform teleportTarget; // Assign in Inspector
 
         protected void Awake()
         {
@@ -15,14 +15,27 @@ namespace Assembly_CSharp
         {
             if (player == null || teleportTarget == null) return;
 
+            // Teleport the player
             player.transform.position = teleportTarget.position;
+            Debug.Log("Player teleported to: " + teleportTarget.position);
+        }
 
-            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-            if (rb != null)
-                rb.linearVelocity = Vector2.zero;
-
-            Debug.Log("Teleport Potion used! Player teleported.");
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            if (player != null)
+            {
+                ApplyEffect(player);
+                Destroy(gameObject); // Remove potion after use
+                Debug.Log("TeleportPotion collected!");
+            }
         }
     }
 }
+
+
+
+
+
+
 

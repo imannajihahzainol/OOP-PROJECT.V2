@@ -8,5 +8,6 @@ namespace Assets
 {
     internal class Potion
     {
+        
     }
 }
