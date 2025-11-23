@@ -148,8 +148,10 @@ public class PlayerMovement : MonoBehaviour
 
     // -------------------------------------------------------------
     // RESPAWN SYSTEM
-    private void Respawn()
+    public void Respawn()
     {
+        Debug.Log("Respawn point position: " + respawnPoint.position);
+        Debug.Log("Moving player to: " + respawnPoint.position);
         lives = 3;
         transform.position = respawnPoint.position;
         rb.linearVelocity = Vector2.zero;
@@ -227,12 +229,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("Ladder"))
             isOnLadder = true;
 
-        // WATER ALWAYS KILLS
-        if (collision.CompareTag("Water"))
-        {
-            Debug.Log("Player fell into water!");
-            Respawn();
-        }
+      
     }
 
     private void OnTriggerExit2D(Collider2D collision)

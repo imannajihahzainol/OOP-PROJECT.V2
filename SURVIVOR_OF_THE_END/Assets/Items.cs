@@ -64,21 +64,6 @@ namespace Assembly_CSharp
         }
     }
 
-    public class Heal : Potion
-    {
-        public int healAmount = 20;
-
-        protected void Awake()
-        {
-            Initialize("Heal Potion");
-        }
-
-        public override void ApplyEffect(PlayerMovement player)
-        {
-            if (player == null) return;
-            player.Heal(healAmount);
-        }
-    }
 
     // -------------------- WEAPONS --------------------
 

@@ -15,6 +15,7 @@ public class ThornTrap : MonoBehaviour
             if (player != null)
             {
                 player.takeDamage(damageAmount);
+                Debug.Log($"Thorn Trap triggered! Dealt {damageAmount} damage to player.");
             }
             Invoke(nameof(ResetDamage), damageCooldown);
         }
