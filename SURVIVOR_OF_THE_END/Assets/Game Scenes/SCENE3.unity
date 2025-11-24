@@ -1258,7 +1258,7 @@ GameObject:
   - component: {fileID: 217210526}
   m_Layer: 6
   m_Name: ladder
-  m_TagString: Untagged
+  m_TagString: Ladder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3893,6 +3893,8 @@ GameObject:
   m_Component:
   - component: {fileID: 461195547}
   - component: {fileID: 461195546}
+  - component: {fileID: 461195549}
+  - component: {fileID: 461195548}
   m_Layer: 0
   m_Name: Sword5
   m_TagString: Untagged
@@ -3973,6 +3975,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &461195548
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461195545}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &461195549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461195545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5813414cba30214498ff3cdb5eb7405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImmediatePickup
 --- !u!1 &469062076
 GameObject:
   m_ObjectHideFlags: 0
@@ -5291,6 +5351,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &850949055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7032388832028723829, guid: 32e4ca33b0926f34fbac3a918df84830, type: 3}
+  m_PrefabInstance: {fileID: 1084062404}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &859554890
 GameObject:
   m_ObjectHideFlags: 0
@@ -5954,6 +6019,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5449442274225960162, guid: 32e4ca33b0926f34fbac3a918df84830, type: 3}
   m_PrefabInstance: {fileID: 1084062404}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1049693435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850949055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96035ac4579f2847bf4e76d96f3d88f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  currentLevel: 0
+  isGameOver: 0
+  respawnPoint: {fileID: 1049693434}
+  levels: []
 --- !u!1 &1051867622
 GameObject:
   m_ObjectHideFlags: 0
@@ -6729,7 +6810,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7032388832028723829, guid: 32e4ca33b0926f34fbac3a918df84830, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1049693435}
   m_SourcePrefab: {fileID: 100100000, guid: 32e4ca33b0926f34fbac3a918df84830, type: 3}
 --- !u!1 &1097626942
 GameObject:
@@ -17716,6 +17800,8 @@ GameObject:
   - component: {fileID: 1674966876}
   - component: {fileID: 1674966875}
   - component: {fileID: 1674966877}
+  - component: {fileID: 1674966879}
+  - component: {fileID: 1674966878}
   m_Layer: 0
   m_Name: Big Vial - BLUE - 0000
   m_TagString: Untagged
@@ -17842,6 +17928,34 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.22, y: 0.37}
   m_EdgeRadius: 0
+--- !u!114 &1674966878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674966874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361fb7bd720aed64894bf6fd0c75b8bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assembly_CSharp.ImmunePotion
+  itemName: 
+  itemType: 
+  isCollected: 0
+  immunityDuration: 5
+--- !u!114 &1674966879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674966874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5813414cba30214498ff3cdb5eb7405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImmediatePickup
 --- !u!1 &1726024330
 GameObject:
   m_ObjectHideFlags: 0
@@ -19018,6 +19132,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1986313441}
   - component: {fileID: 1986313440}
+  - component: {fileID: 1986313443}
+  - component: {fileID: 1986313442}
+  - component: {fileID: 1986313444}
   m_Layer: 0
   m_Name: Small Bottle - PINK - 0001
   m_TagString: Untagged
@@ -19098,6 +19215,82 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1986313442
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986313439}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.48, y: 1.04}
+    newSize: {x: 0.48, y: 1.04}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.48, y: 1.04}
+  m_EdgeRadius: 0
+--- !u!114 &1986313443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986313439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5813414cba30214498ff3cdb5eb7405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImmediatePickup
+--- !u!114 &1986313444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986313439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab7f24416b0c5847bf0fae0d0067458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assembly_CSharp.Booster
+  itemName: 
+  itemType: 
+  isCollected: 0
+  speedIncrease: 10
+  jumpIncrease: 10
+  damageIncrease: 10
 --- !u!1 &2018762819
 GameObject:
   m_ObjectHideFlags: 0
