@@ -2,45 +2,64 @@
 
 public class RunningZombie : Zombie
 {
-    public float sprintSpeed = 5f;
-    public float detectionRange = 8f; // how far it can see the player
+    [Header("Running Zombie Stats")]
+    public int runSpeed = 3;
+    public float chaseRange = 5f;
+    public Transform playerTransform;
+
+    private Vector3 originalPosition;
+
+    protected override void Start()
+    {
+        base.Start();
+        originalPosition = transform.position;
+
+        if (playerTransform == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                playerTransform = playerObject.transform;
+            }
+        }
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
 
     void Update()
     {
-        if (player == null) return;
-
-        float distance = Vector2.Distance(transform.position, player.position);
-
-        if (distance <= detectionRange && isGrounded)
+        if (playerTransform != null)
         {
-            // Move only on the X axis (stays on ground)
-            Vector2 target = new Vector2(player.position.x, transform.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, target, sprintSpeed * Time.deltaTime);
+            ChasePlayer(playerTransform);
+        }
+    }
 
-            // Face player
-            if (player.position.x > transform.position.x)
-                transform.localScale = new Vector3(1, 1, 1);
-            else
-                transform.localScale = new Vector3(-1, 1, 1);
+    public override void ChasePlayer(Transform player)
+    {
+        if (!isGrounded) return;
 
-            // Attack if close enough
-            AttackPlayer();
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        // Chase player
+        if (distanceToPlayer <= chaseRange)
+        {
+            Vector2 target = player.position;
+            transform.position = Vector2.MoveTowards(transform.position, target, runSpeed * Time.deltaTime);
         }
         else
         {
-            Idle();
+            // Return to start point
+            transform.position = Vector2.MoveTowards(transform.position, originalPosition, runSpeed * Time.deltaTime);
         }
-    }
 
-    public override void AttackPlayer()
-    {
-        base.AttackPlayer();
-        Debug.Log(name + " Zombies attacks the player!");
-    }
-
-    void Idle()
-    {
-        // You can add idle animation later
-        // For now, just stop moving
+        // Flip sprite
+        Vector3 scale = transform.localScale;
+        scale.x = player.position.x > transform.position.x
+                  ? Mathf.Abs(scale.x)
+                  : -Mathf.Abs(scale.x);
+        transform.localScale = scale;
     }
 }
