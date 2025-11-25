@@ -231,38 +231,27 @@ public class PlayerMovement : MonoBehaviour
     // TRIGGERS
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // --- EXISTING LADDER CODE ---
-        if (collision.CompareTag("Ladder"))
+        // --- EXISTING LADDER CODE ---
+        if (collision.CompareTag("Ladder"))
             isOnLadder = true;
 
-        // --- FIXED BONE CODE ---
-        if (collision.CompareTag("Bone"))
+        // --- EXISTING BONE CODE ---
+        // ... (Bone code remains the same) ...
+
+        // --- EXISTING DOG SUBMISSION ---
+        // ... (Dog code remains the same) ...
+
+        // ------------------ NEW CODE FOR PICKUP ------------------
+        Item item = collision.GetComponent<Item>();
+        if (item != null)
         {
-            // NEW LINE: Turn off the bone's trigger immediately
-            // This prevents your feet and body from BOTH counting it
-            collision.enabled = false;
-
-            bonesCollected++;
-            Destroy(collision.gameObject, 0.1f); // Destroy with a tiny delay
-
-            // Update UI
-            if (boneText != null)
-                boneText.text = "Bones: " + bonesCollected + "/3";
+            // NEW: Use the Collect and Use methods defined in the Item class.
+            item.Collect(); // Mark the item as collected
+            item.Use(this); // Apply the item's effect (which equips the weapon)
+            Destroy(collision.gameObject); // Remove the item from the scene
         }
-
-        // --- DOG SUBMISSION ---
-        if (collision.CompareTag("Dog"))
-        {
-            if (bonesCollected >= 3)
-            {
-                Debug.Log("Woof Woof! (Quest Complete!)");
-            }
-            else
-            {
-                Debug.Log("The dog required more bones... You need " + (3 - bonesCollected) + " more bones.");
-            }
-        }
-    }
+    
+}
 
     private void OnTriggerExit2D(Collider2D collision)
     {

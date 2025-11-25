@@ -9,6 +9,8 @@ TagManager:
   - fire
   - Slime
   - Bone
+  - Dog
+  - Weapon
   - BossZombie
   layers:
   - Default
