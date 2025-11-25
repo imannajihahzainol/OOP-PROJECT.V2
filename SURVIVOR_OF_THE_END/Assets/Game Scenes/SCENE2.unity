@@ -6902,22 +6902,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1223421419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1180f716e3bce624e92766705227ef97, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e857724c7f79844fb422aa8a9626040, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RunningZombie
+  m_EditorClassIdentifier: Assembly-CSharp::MovingZombie
   speed: 1
-  health: 100
-  damage: 10
-  attackRange: 1.5
-  attackCooldown: 1.5
-  groundCheck: {fileID: 0}
-  groundCheckDistance: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  runSpeed: 3
-  chaseRange: 5
-  playerTransform: {fileID: 0}
+  leftLimit: 6.55
+  rightLimit: 8.45
 --- !u!1 &1233464607
 GameObject:
   m_ObjectHideFlags: 0
@@ -8508,10 +8498,10 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 0bf50b8898209df41a66bc763b3309f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.32, y: 0.32}
@@ -8544,22 +8534,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355249973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1180f716e3bce624e92766705227ef97, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e857724c7f79844fb422aa8a9626040, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RunningZombie
+  m_EditorClassIdentifier: Assembly-CSharp::MovingZombie
   speed: 1
-  health: 100
-  damage: 10
-  attackRange: 1.5
-  attackCooldown: 1.5
-  groundCheck: {fileID: 0}
-  groundCheckDistance: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  runSpeed: 3
-  chaseRange: 5
-  playerTransform: {fileID: 0}
+  leftLimit: 13.21
+  rightLimit: 16.02
 --- !u!1 &1420561891
 GameObject:
   m_ObjectHideFlags: 0
@@ -9359,7 +9339,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 0bf50b8898209df41a66bc763b3309f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9380,7 +9360,7 @@ Transform:
   m_GameObject: {fileID: 1817113859}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.21, y: 4.14, z: 0}
+  m_LocalPosition: {x: 13.19, y: 4.08, z: 0}
   m_LocalScale: {x: 5.9334, y: 5.9334, z: 1.4384}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9399,16 +9379,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StaticZombie
   speed: 1
-  health: 100
-  damage: 10
-  attackRange: 1.5
-  attackCooldown: 1.5
-  groundCheck: {fileID: 0}
-  groundCheckDistance: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  detectionRange: 5
+  leftLimit: 13.21
+  rightLimit: 16.02
 --- !u!1 &1903887015
 GameObject:
   m_ObjectHideFlags: 0
@@ -11044,7 +11016,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1998945705}
   - component: {fileID: 1998945704}
-  - component: {fileID: 1998945706}
   - component: {fileID: 1998945707}
   m_Layer: 0
   m_Name: skeleton-idle1
@@ -11120,24 +11091,12 @@ Transform:
   m_GameObject: {fileID: 1998945703}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.3264, y: 7.9718, z: 0}
+  m_LocalPosition: {x: -13.3264, y: 7.74, z: 0}
   m_LocalScale: {x: 5.6438503, y: 5.257586, z: 1.4384}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1998945706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998945703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a28e059f504bf245b2dcc3ca15b8c17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &1998945707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11151,16 +11110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StaticZombie
   speed: 1
-  health: 100
-  damage: 10
-  attackRange: 1.5
-  attackCooldown: 1.5
-  groundCheck: {fileID: 0}
-  groundCheckDistance: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  detectionRange: 5
+  leftLimit: -13.3264
+  rightLimit: -10.6
 --- !u!1 &2132304021
 GameObject:
   m_ObjectHideFlags: 0
@@ -11402,16 +11353,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StaticZombie
   speed: 1
-  health: 100
-  damage: 10
-  attackRange: 1.5
-  attackCooldown: 1.5
-  groundCheck: {fileID: 0}
-  groundCheckDistance: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  detectionRange: 5
+  leftLimit: 6.64
+  rightLimit: 9.37
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
