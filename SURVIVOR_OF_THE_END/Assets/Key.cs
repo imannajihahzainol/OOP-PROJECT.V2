@@ -1,40 +1,22 @@
 ﻿using UnityEngine;
-using Assembly_CSharp;
 
-public class Key
+public class Key : MonoBehaviour
 {
-    public string keyType;
-    public bool isCollected;
-    public Key(string keyType)
-    {
-        this.keyType = keyType;
-        this.isCollected = false;
-    }
+    public string playerKeyType;  // jenis key player pegang
 
-    public void Collect(PlayerMovement player)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isCollected)
+        Chest chest = other.GetComponent<Chest>();
+        if (chest != null)
         {
-            isCollected = true;
-            Debug.Log($"{player.name} collected the {keyType} key!");
-        }
-        else
-        {
-            Debug.Log("This key is already collected.");
-        }
-    }
-
-    public void UseKey(Chest chest)
-    {
-        if (isCollected && chest.keyType == this.keyType)
-        {
-            chest.OpenChest();
-            isCollected = false; 
-            Debug.Log($"Used {keyType} key to open the chest.");
-        }
-        else
-        {
-            Debug.Log("Cannot use this key here, or the key type doesn't match.");
+            if (chest.keyType == playerKeyType)
+            {
+                chest.OpenChest();
+            }
+            else
+            {
+                Debug.Log("Wrong key!");
+            }
         }
     }
 }
