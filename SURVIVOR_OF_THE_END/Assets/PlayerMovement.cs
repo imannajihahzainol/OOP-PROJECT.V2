@@ -1,6 +1,7 @@
 using Assembly_CSharp;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Stats")]
     public int lives = 3;
     public int health = 100;
+
+    [Header("Quest Stats")]
+    public int bonesCollected = 0; // Tracks how many bones collected
 
     [Header("Immunity")]
     public bool isImmune = false;        // Potion immunity (for slime only)
@@ -49,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     private int groundLayer;
     private int playerLayer;
+    public TextMeshProUGUI boneText;
 
     // -------------------------------------------------------------
     void Awake()
@@ -226,10 +231,37 @@ public class PlayerMovement : MonoBehaviour
     // TRIGGERS
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // --- EXISTING LADDER CODE ---
         if (collision.CompareTag("Ladder"))
             isOnLadder = true;
 
-      
+        // --- FIXED BONE CODE ---
+        if (collision.CompareTag("Bone"))
+        {
+            // NEW LINE: Turn off the bone's trigger immediately
+            // This prevents your feet and body from BOTH counting it
+            collision.enabled = false;
+
+            bonesCollected++;
+            Destroy(collision.gameObject, 0.1f); // Destroy with a tiny delay
+
+            // Update UI
+            if (boneText != null)
+                boneText.text = "Bones: " + bonesCollected + "/3";
+        }
+
+        // --- DOG SUBMISSION ---
+        if (collision.CompareTag("Dog"))
+        {
+            if (bonesCollected >= 3)
+            {
+                Debug.Log("Woof Woof! (Quest Complete!)");
+            }
+            else
+            {
+                Debug.Log("The dog required more bones... You need " + (3 - bonesCollected) + " more bones.");
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

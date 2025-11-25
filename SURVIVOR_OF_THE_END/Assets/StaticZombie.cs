@@ -15,15 +15,6 @@ public class StaticZombie : Zombie
             ChasePlayer(player);
             AttackPlayer(); // Attack when near
         }
-        else
-        {
-            GuardArea();
-        }
     }
 
-    public void GuardArea()
-
-    {
-        Debug.Log(name + " is guarding its area.");
-    }
 }

@@ -9,6 +9,7 @@ TagManager:
   - fire
   - Slime
   - Bone
+  - Dog
   layers:
   - Default
   - TransparentFX
