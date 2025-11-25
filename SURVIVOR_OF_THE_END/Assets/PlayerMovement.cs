@@ -75,13 +75,13 @@ public class PlayerMovement : MonoBehaviour
     public void moveLeft()
     {
         rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
-        transform.localScale = new Vector3(-1, 1, 1);
+        transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 
     public void moveRight()
     {
         rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
-        transform.localScale = new Vector3(1, 1, 1);
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 
     public void jump()

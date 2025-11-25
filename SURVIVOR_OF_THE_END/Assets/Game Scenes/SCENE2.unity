@@ -405,7 +405,7 @@ GameObject:
   m_Layer: 7
   m_Name: mc
   m_TagString: Player
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -579,7 +579,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.7134, y: -1.1076, z: 0}
-  m_LocalScale: {x: 1.5783035, y: 1.4336249, z: 2.891218}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1008822981}
@@ -2947,7 +2947,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 56
-      m_TileSpriteIndex: 8
+      m_TileSpriteIndex: 38
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4808,8 +4808,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 27
     m_Data: {fileID: 2033939942, guid: e5632b340098fdb478d208cb9c38d55e, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1013477907, guid: e5632b340098fdb478d208cb9c38d55e, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: -287412173, guid: e5632b340098fdb478d208cb9c38d55e, type: 3}
   - m_RefCount: 1
@@ -4868,8 +4868,8 @@ Tilemap:
     m_Data: {fileID: 1249775354, guid: e5632b340098fdb478d208cb9c38d55e, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 212381541, guid: 10b2f662f3700854aa9651a3ba434af6, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1013477907, guid: e5632b340098fdb478d208cb9c38d55e, type: 3}
   - m_RefCount: 10
     m_Data: {fileID: -43653109, guid: e5632b340098fdb478d208cb9c38d55e, type: 3}
   - m_RefCount: 2
@@ -8173,9 +8173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c96035ac4579f2847bf4e76d96f3d88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  currentWeapon: {fileID: 0}
   currentLevel: 0
   isGameOver: 0
+  respawnPoint: {fileID: 0}
   levels: []
 --- !u!4 &1420561893
 Transform:
@@ -10562,8 +10562,8 @@ Transform:
   m_GameObject: {fileID: 1998945703}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.28, y: 8.08, z: 0}
-  m_LocalScale: {x: 5.9334, y: 5.9334, z: 1.4384}
+  m_LocalPosition: {x: -13.3264, y: 7.9718, z: 0}
+  m_LocalScale: {x: 5.6438503, y: 5.257586, z: 1.4384}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
