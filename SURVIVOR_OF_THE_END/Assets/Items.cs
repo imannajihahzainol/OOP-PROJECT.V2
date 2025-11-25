@@ -67,34 +67,6 @@ namespace Assembly_CSharp
         }
     }
 
-    public class Sword : Weapons
-    {
-        public float slashSpeed = 1.0f;
-        public int swordDamage = 50;
-
-        protected void Awake()
-        {
-            Initialize("Sword");
-        }
-
-        public void Slash(Zombie target)
-        {
-            if (target != null && !target.IsDead())
-                target.TakeDamage(swordDamage);
-
-            Animator animator = GetComponent<Animator>();
-            if (animator != null)
-            {
-                animator.SetTrigger("Slash");
-                animator.speed = slashSpeed;
-            }
-        }
-
-        public override void Attack(Zombie target)
-        {
-            Slash(target);
-        }
-    }
 
     public class Gun : Weapons
     {
