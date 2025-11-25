@@ -3,25 +3,24 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     [Header("Optional Key")]
-    public string keyType;          // Nama key yang diperlukan, optional
+    public string keyType;
 
     [Header("Item Settings")]
-    public bool hasItem = false;    // Ada item atau tidak
-    public GameObject itemPrefab;   // Item spawn bila chest dibuka
+    public bool hasItem = false;
+    public GameObject itemPrefab;
+    public float spawnOffsetY = 0.5f;   // <-- declared here, accessible everywhere in this class
 
     [Header("Animation")]
-    public Animator animator;       // Chest Animator
+    public Animator animator;
 
-    private bool isOpened = false;  // Cegah chest dibuka lebih dari sekali
+    private bool isOpened = false;
 
     void Start()
     {
-        // Ambil animator dari chest sendiri kalau belum assign
         if (animator == null)
             animator = GetComponent<Animator>();
     }
 
-    // Panggil bila player dekat / dari script lain
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !isOpened)
@@ -30,15 +29,21 @@ public class Chest : MonoBehaviour
 
     public void OpenChest()
     {
+        if (isOpened) return;
         isOpened = true;
 
         if (animator != null)
             animator.SetTrigger("Open");
 
         if (hasItem && itemPrefab != null)
-            Instantiate(itemPrefab, transform.position + Vector3.up, Quaternion.identity);
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, spawnOffsetY, 0);
+            Instantiate(itemPrefab, spawnPos, Quaternion.identity);
+        }
         else
+        {
             Debug.Log("Chest is empty!");
+        }
     }
-
 }
+
