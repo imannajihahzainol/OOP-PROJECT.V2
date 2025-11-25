@@ -4,6 +4,7 @@ namespace Assembly_CSharp
 {
     public class Booster : Potion
     {
+        public float boosterDuration = 3f;
         [Header("Boost Values")]
         public float speedIncrease = 10f;
         public float jumpIncrease = 10f;
