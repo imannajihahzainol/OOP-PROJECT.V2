@@ -8,7 +8,6 @@ namespace Assembly_CSharp
         [Header("Boost Values")]
         public float speedIncrease = 10f;
         public float jumpIncrease = 10f;
-        public float damageIncrease = 10f;
 
         protected void Awake()
         {
@@ -27,7 +26,7 @@ namespace Assembly_CSharp
             player.IncreaseSpeed(speedIncrease);
             player.IncreaseJump(jumpIncrease);
 
-            Debug.Log($"Booster applied! Speed +{speedIncrease}, Jump +{jumpIncrease}, Damage +{damageIncrease}");
+            Debug.Log($"Booster applied! Speed +{speedIncrease}, Jump +{jumpIncrease}");
         }
     }
 }
