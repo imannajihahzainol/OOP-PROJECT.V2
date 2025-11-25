@@ -231,11 +231,11 @@ public class PlayerMovement : MonoBehaviour
     // TRIGGERS
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // --- EXISTING LADDER CODE ---
-        if (collision.CompareTag("Ladder"))
+    // --- EXISTING LADDER CODE ---
+    if (collision.CompareTag("Ladder"))
             isOnLadder = true;
 
-        // --- FIXED BONE CODE ---
+    // --- FIXED BONE CODE ---
         if (collision.CompareTag("Bone"))
         {
             // NEW LINE: Turn off the bone's trigger immediately
