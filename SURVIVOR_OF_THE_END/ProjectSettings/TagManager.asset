@@ -11,6 +11,7 @@ TagManager:
   - Bone
   - Dog
   - Weapon
+  - BossZombie
   layers:
   - Default
   - TransparentFX

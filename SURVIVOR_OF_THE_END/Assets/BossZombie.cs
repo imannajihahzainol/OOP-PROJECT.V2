@@ -1,36 +1,37 @@
 ﻿using UnityEngine;
+using System;
 
-public class BossZombie : Zombie
+public class BossZombie : MonoBehaviour
 {
-    [Header("Boss Stats")]
-    public int attackPower = 50;
-    public int rewards = 100;
+    public int maxHealth = 3;
+    private int currentHealth;
 
-    void Update()
+    public static event Action OnBossDead;
+
+    void Start()
     {
-        if (player == null) return;
-
-        ChasePlayer(player);
-        AttackPlayer();
+        currentHealth = maxHealth;
     }
 
-    public override void AttackPlayer()
+    public void TakeDamage(int damage)
     {
-        Debug.Log(name + " performs a powerful attack with " + attackPower + " power!");
-        if (playerScript != null)
-        {
-            playerScript.takeDamage(attackPower);
-        }
+        currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0);
+        Debug.Log($"Boss Zombie took {damage} damage: {currentHealth} HP left");
+
+        if (currentHealth <= 0) Die();
     }
 
-    public void SpecialAttack()
+    private void Die()
     {
-        Debug.Log(name + " uses its special attack and drops " + rewards + " reward points!");
+        Debug.Log("Boss Zombie is dead!");
+        OnBossDead?.Invoke();
+        Destroy(gameObject);
     }
 
-    protected override void Die()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(name + " is dead and drops " + rewards + " reward points!");
-        base.Die();
+        if (collision.gameObject.CompareTag("PlayerWeapon"))
+            TakeDamage(1); // example damage
     }
 }

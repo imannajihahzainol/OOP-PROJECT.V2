@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1e51fbcbc669430419603fd176c3739c
+guid: c28befcb9e5f3a749a83a775bc766d84
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,10 +100,10 @@ TextureImporter:
       name: chest_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 11
+        y: 18
+        width: 42
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 371d83e6761a0c44486815b1353953ef
-      internalID: 869219127
+      spriteID: 7225150cb757f584680aebfc82565ccf
+      internalID: -905617434
       vertices: []
       indices: 
       edges: []
@@ -122,10 +122,10 @@ TextureImporter:
       name: chest_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
+        x: 75
+        y: 18
+        width: 42
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,8 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: deb1e91ccba81964f9af5078ff1c8a81
-      internalID: 1046304809
+      spriteID: 2bfa727a08c714e4a9c3904fc06367d0
+      internalID: -23771468
       vertices: []
       indices: 
       edges: []
@@ -144,10 +144,10 @@ TextureImporter:
       name: chest_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
+        x: 139
+        y: 18
+        width: 42
+        height: 39
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,8 +156,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9ab114550dfb6746aa34a83609d45ee
-      internalID: 1595997602
+      spriteID: 487a5768799c5994097ecfb3321a058a
+      internalID: -894894776
       vertices: []
       indices: 
       edges: []
@@ -166,10 +166,10 @@ TextureImporter:
       name: chest_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
+        x: 203
+        y: 18
+        width: 42
+        height: 39
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,8 +178,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89ed8f9a46b0b924b96b894abef3428e
-      internalID: 2129913632
+      spriteID: 2da03240c2b46c549b18e03f6d5928eb
+      internalID: -696283299
       vertices: []
       indices: 
       edges: []
@@ -188,10 +188,10 @@ TextureImporter:
       name: chest_4
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
+        x: 267
+        y: 18
+        width: 42
+        height: 39
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc12bad681add9445a216f2a82c5b274
-      internalID: -1622807536
+      spriteID: 19224a43fab2db1418e579b0c3d793b5
+      internalID: -1301563789
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
       name: chest_5
       rect:
         serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
+        x: 331
+        y: 18
+        width: 42
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,8 +222,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5875cf3c4c4a70e4d8489be4df1e49fc
-      internalID: -49954143
+      spriteID: 0fa3019e302df654e8d7cf796a461506
+      internalID: -1896822813
       vertices: []
       indices: 
       edges: []
@@ -232,7 +232,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fa71a97e2499a6247afa5046da016a5b
+    spriteID: 007135c405671384ba507b5e2ec6d7a3
     internalID: 0
     vertices: []
     indices: 
@@ -242,16 +242,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
-      - key: SpriteEditor.SliceOnImport
-        value: False
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      chest_0: 869219127
-      chest_1: 1046304809
-      chest_2: 1595997602
-      chest_3: 2129913632
-      chest_4: -1622807536
-      chest_5: -49954143
+      chest_0: -905617434
+      chest_1: -23771468
+      chest_2: -894894776
+      chest_3: -696283299
+      chest_4: -1301563789
+      chest_5: -1896822813
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
