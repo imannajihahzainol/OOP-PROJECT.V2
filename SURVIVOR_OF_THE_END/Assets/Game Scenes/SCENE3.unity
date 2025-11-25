@@ -472,7 +472,7 @@ Transform:
   m_GameObject: {fileID: 39961415}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.66, y: 9.31, z: 0}
+  m_LocalPosition: {x: -26.32, y: 9.92, z: 0}
   m_LocalScale: {x: 1.6082503, y: 1.225875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4732,7 +4732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99931760b3cb62d41a59051e7fd1c663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Key
-  nextSceneName: FINALLEVEL
+  nextSceneName: 
 --- !u!1 &557678042
 GameObject:
   m_ObjectHideFlags: 0
@@ -18992,7 +18992,6 @@ MonoBehaviour:
   boosterDuration: 3
   speedIncrease: 5
   jumpIncrease: 5
-  damageIncrease: 5
 --- !u!1 &2018762819
 GameObject:
   m_ObjectHideFlags: 0
