@@ -2,38 +2,31 @@ using UnityEngine;
 
 public class SizeUp : MonoBehaviour
 {
-    [Header("Size-Up Potion Settings")]
-    public float sizeMultiplier = 0.5f;
-    public string groundTag = "Ground"; // Tag of your Tilemap or ground object
+    public float sizeMultiplier = 1.5f;
 
-    void OnTriggerEnter2D(Collider2D other)
+    [Header("Boss Activation")]
+    public GameObject bossZombieParent;   // assign the boss parent or the boss itself, inactive at start
+
+    [Header("Tilemap Switching")]
+    public GameObject currentGrid;        // active grid
+    public GameObject newGrid;            // inactive grid to switch to
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+        if (!collision.CompareTag("Player")) return;
 
-            if (player != null)
-            {
-                // Increase player size
-                player.IncreaseSize(sizeMultiplier);
-                Debug.Log($"Player size increased by {sizeMultiplier}!");
+        // 1. Increase player size
+        collision.transform.localScale *= sizeMultiplier;
 
-                // Disable the ground tilemap or object
-                GameObject groundObj = GameObject.FindGameObjectWithTag(groundTag);
+        // 2. Activate boss
+        bossZombieParent.SetActive(true);
+        Debug.Log("Boss Zombie ACTIVATED!");
 
-                if (groundObj != null)
-                {
-                    groundObj.SetActive(false);
-                    Debug.Log("Ground is now disabled for boss fight.");
-                }
-                else
-                {
-                    Debug.LogWarning("GROUND OBJECT WITH TAG 'Ground' NOT FOUND!");
-                }
+        // 3. Switch tilemaps
+        if (currentGrid != null) currentGrid.SetActive(false);
+        if (newGrid != null) newGrid.SetActive(true);
 
-                // Destroy potion
-                Destroy(gameObject);
-            }
-        }
+        // 4. Destroy the potion
+        Destroy(gameObject);
     }
 }
