@@ -10,6 +10,7 @@ TagManager:
   - Slime
   - Bone
   - Dog
+  - Weapon
   layers:
   - Default
   - TransparentFX
