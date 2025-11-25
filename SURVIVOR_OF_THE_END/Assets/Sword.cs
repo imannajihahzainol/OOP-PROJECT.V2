@@ -21,7 +21,7 @@ public class Sword : Weapons
     // Method to attack a zombie
     public void Slash(Zombie target)
     {
-        if (target != null && !target.IsDead())
+        if (target != null && !target.IsDead)
         {
             target.TakeDamage(swordDamage);
             Debug.Log($"Sword dealt {swordDamage} damage to {target.name}!");

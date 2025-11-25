@@ -18,7 +18,7 @@ public class FireDamage : MonoBehaviour
                     return;
                 }
                 // Apply fire damage
-                player.takeDamage(damageAmount);
+                player.TakeDamage(damageAmount);
                 Debug.Log($"Player took {damageAmount} fire damage!");
             }
         }

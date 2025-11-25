@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerControls controls;
     private Vector2 moveInput;
 
-    private bool isGrounded;
+    public bool isGrounded;
     private bool isAttacking;
     private bool isClimbing = false;
     private bool isOnLadder = false;
@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
     // -------------------------------------------------------------
     // UNIVERSAL DAMAGE FUNCTION
-    public void takeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         // Block only slime damage through the immune potion
         if (isImmune)
@@ -148,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Slime damage ignored (IMMUNE!)");
             return;
         }
-        takeDamage(amount);
+        TakeDamage(amount);
     }
 
 

@@ -1,101 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using Assembly_CSharp;
-
 
 public class Zombie : MonoBehaviour
 {
     [Header("Zombie Stats")]
-    public int speed = 1;
-    public int health = 100;
-    public int damage = 10;
-
-    [Header("Attack Settings")]
-    public float attackRange = 1.5f;
+    public int zombieHealth = 1;
+    public float attackRange = 1f;
     public float attackCooldown = 1.5f;
-
-    [Header("Ground Detection")]
-    public Transform groundCheck;
-    public float groundCheckDistance = 0.2f;
-    public LayerMask groundLayer;
-    protected bool isGrounded;
+    private float lastAttackTime;
+    public bool IsDead;
 
     protected Transform player;
-    protected PlayerMovement playerScript;
-    private float lastAttackTime = 0f;
+    protected PlayerMovement playerMovement;
 
     protected virtual void Start()
     {
-        // Find player automatically
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        if (playerObj != null)
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        if (p != null)
         {
-            player = playerObj.transform;
-            playerScript = playerObj.GetComponent<PlayerMovement>();
+            player = p.transform;
+            playerMovement = p.GetComponent<PlayerMovement>();
         }
     }
 
-    // Base chase behavior (can be overridden)
-    public virtual void ChasePlayer(Transform player)
-    {
-        if (player == null || !isGrounded) return;
+    protected virtual void FixedUpdate() { }
 
-        // Move horizontally toward player (no flying through ground!)
-        Vector2 target = new Vector2(player.position.x, transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
-        // Flip to face player
-        if (player.position.x > transform.position.x)
-            transform.localScale = new Vector3(1, 1, 1);
-        else
-            transform.localScale = new Vector3(-1, 1, 1);
-    }
-
-    // Base attack logic
-    public virtual void AttackPlayer()
-    {
-        if (playerScript == null || player == null) return;
-
-        float distance = Vector2.Distance(transform.position, player.position);
-        if (distance <= attackRange && Time.time - lastAttackTime >= attackCooldown)
-        {
-            Debug.Log(name + " attacks player for " + damage + " damage!");
-            playerScript.takeDamage(damage);
-            lastAttackTime = Time.time;
-        }
-    }
-
-    // Damage handling
+    // ZOMBIE TAKES DAMAGE
     public virtual void TakeDamage(int amount)
     {
-        health -= amount;
-        Debug.Log(name + " took " + amount + " damage. Remaining health: " + health);
-
-        if (IsDead()) Die();
+        zombieHealth -= amount;
+        if (zombieHealth <= 0)
+            Destroy(gameObject);
     }
 
-    public virtual bool IsDead() => health <= 0;
-
-    protected virtual void Die()
+    // ZOMBIE ATTACK PLAYER
+    public virtual void AttackPlayer()
     {
-        Debug.Log(name + " is dead!");
-        Destroy(gameObject);
-    }
+        if (player == null || playerMovement == null) return;
 
-    protected virtual void FixedUpdate()
-    {
-        CheckGround();
-    }
+        float distance = Vector2.Distance(transform.position, player.position);
 
-    protected void CheckGround()
-    {
-        if (groundCheck != null)
-            isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+        if (distance <= attackRange)
+        {
+            if (Time.time - lastAttackTime >= attackCooldown)
+            {
+                playerMovement.TakeDamage(1);   // ✔ using your playerMovement code
+                lastAttackTime = Time.time;
+            }
+        }
     }
-  
+    public virtual void ChasePlayer(Transform targetPlayer)
+    {
+        // handled in child classes
+    }
 }

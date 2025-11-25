@@ -20,7 +20,7 @@ public class ThornTrap : MonoBehaviour
             if (player != null)
             {
                 Debug.Log("Thorn Trap hit player for 1 life!");
-                player.takeDamage(damageAmount);
+                player.TakeDamage(damageAmount);
                 Debug.Log($"Thorn Trap triggered! Dealt {damageAmount} damage to player.");
             }
 

@@ -423,6 +423,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  isGrounded: 0
   boneText: {fileID: 679444511}
 --- !u!212 &359021817
 SpriteRenderer:
@@ -6206,7 +6207,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -300.5, y: -235.5}
+  m_AnchoredPosition: {x: -287.87, y: -229.65}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &679444511
@@ -6946,6 +6947,7 @@ GameObject:
   - component: {fileID: 1223421421}
   - component: {fileID: 1223421420}
   - component: {fileID: 1223421422}
+  - component: {fileID: 1223421423}
   m_Layer: 0
   m_Name: skeleton-idle1 (1)
   m_TagString: Untagged
@@ -7041,6 +7043,43 @@ MonoBehaviour:
   speed: 1
   leftLimit: 6.55
   rightLimit: 8.45
+--- !u!70 &1223421423
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223421419}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.2, y: 0.32000002}
+  m_Direction: 0
 --- !u!1 &1233464607
 GameObject:
   m_ObjectHideFlags: 0
@@ -8745,6 +8784,7 @@ GameObject:
   - component: {fileID: 1355249975}
   - component: {fileID: 1355249974}
   - component: {fileID: 1355249976}
+  - component: {fileID: 1355249977}
   m_Layer: 0
   m_Name: skeleton-idle1 (3)
   m_TagString: Untagged
@@ -8840,6 +8880,43 @@ MonoBehaviour:
   speed: 1
   leftLimit: 13.21
   rightLimit: 16.02
+--- !u!70 &1355249977
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355249973}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.2, y: 0.32000002}
+  m_Direction: 0
 --- !u!1 &1420561891
 GameObject:
   m_ObjectHideFlags: 0
@@ -9358,18 +9435,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ca3a24bb32702499689f3d7a640db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloatingZombie
-  speed: 1
-  health: 100
-  damage: 10
+  zombieHealth: 1
   attackRange: 1.5
   attackCooldown: 1.5
-  groundCheck: {fileID: 0}
-  groundCheckDistance: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  IsDead: 0
   floatHeight: 0.5
   floatSpeed: 2
+  chaseRange: 5
+  moveSpeed: 2
 --- !u!1 &1638574967
 GameObject:
   m_ObjectHideFlags: 0
@@ -9797,6 +9870,7 @@ GameObject:
   - component: {fileID: 1817113861}
   - component: {fileID: 1817113860}
   - component: {fileID: 1817113862}
+  - component: {fileID: 1817113863}
   m_Layer: 0
   m_Name: skeleton-idle1 (2)
   m_TagString: Untagged
@@ -9892,6 +9966,43 @@ MonoBehaviour:
   speed: 1
   leftLimit: 13.21
   rightLimit: 16.02
+--- !u!70 &1817113863
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817113859}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.2, y: 0.32000002}
+  m_Direction: 0
 --- !u!1 &1919536013
 GameObject:
   m_ObjectHideFlags: 0
@@ -11589,6 +11700,7 @@ GameObject:
   - component: {fileID: 1998945705}
   - component: {fileID: 1998945704}
   - component: {fileID: 1998945707}
+  - component: {fileID: 1998945708}
   m_Layer: 0
   m_Name: skeleton-idle1
   m_TagString: Untagged
@@ -11684,6 +11796,43 @@ MonoBehaviour:
   speed: 1
   leftLimit: -13.3264
   rightLimit: -10.6
+--- !u!70 &1998945708
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998945703}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.2, y: 0.32}
+  m_Direction: 0
 --- !u!1 &2141968760
 GameObject:
   m_ObjectHideFlags: 0
@@ -11695,6 +11844,7 @@ GameObject:
   - component: {fileID: 2141968762}
   - component: {fileID: 2141968761}
   - component: {fileID: 2141968763}
+  - component: {fileID: 2141968764}
   m_Layer: 0
   m_Name: skeleton-idle1 (4)
   m_TagString: Untagged
@@ -11790,6 +11940,43 @@ MonoBehaviour:
   speed: 1
   leftLimit: 6.64
   rightLimit: 9.37
+--- !u!70 &2141968764
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141968760}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.2, y: 0.32000002}
+  m_Direction: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

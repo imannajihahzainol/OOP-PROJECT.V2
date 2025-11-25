@@ -19,7 +19,7 @@ public class Gun : Weapons
 
         bullets--;
 
-        if (target != null && !target.IsDead())
+        if (target != null && !target.IsDead)
             target.TakeDamage(gunDamage);
 
         if (muzzleFlash != null) muzzleFlash.Play();

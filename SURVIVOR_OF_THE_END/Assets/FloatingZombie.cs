@@ -2,8 +2,11 @@
 
 public class FloatingZombie : Zombie
 {
+    [Header("Floating Zombie Settings")]
     public float floatHeight = 0.5f;
     public float floatSpeed = 2f;
+    public float chaseRange = 5f;
+    public float moveSpeed = 2f;
 
     private Vector3 startPos;
 
@@ -24,12 +27,14 @@ public class FloatingZombie : Zombie
             transform.position.z
         );
 
-        ChasePlayer(player);
+        //  and attack player
         AttackPlayer();
     }
 
+
+    // Optional: debug
     public void FloatAround()
     {
-        Debug.Log(name + " is floating around at height " + floatHeight);
+        Debug.Log(name + " is floating at height " + floatHeight);
     }
 }
