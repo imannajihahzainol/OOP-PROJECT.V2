@@ -48,22 +48,6 @@ namespace Assembly_CSharp
         public abstract void ApplyEffect(PlayerMovement player);
     }
 
-    public class SizeUp : Potion
-    {
-        public float sizeMultiplier = 0.5f;
-
-        protected void Awake()
-        {
-            Initialize("Size-Up Potion");
-        }
-
-        public override void ApplyEffect(PlayerMovement player)
-        {
-            if (player == null) return;
-            player.IncreaseSize(sizeMultiplier);
-        }
-    }
-
 
     // -------------------- WEAPONS --------------------
 
