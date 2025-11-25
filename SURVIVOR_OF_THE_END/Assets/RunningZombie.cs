@@ -22,7 +22,7 @@ public class RunningZombie : Zombie
         }
     }
 
-    protected override void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         base.FixedUpdate();
     }

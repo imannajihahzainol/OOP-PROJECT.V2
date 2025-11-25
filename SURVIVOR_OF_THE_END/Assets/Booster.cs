@@ -6,8 +6,8 @@ namespace Assembly_CSharp
     {
         public float boosterDuration = 3f;
         [Header("Boost Values")]
-        public float speedIncrease = 10f;
-        public float jumpIncrease = 10f;
+        public float speedIncrease = 5f;
+        public float jumpIncrease = 5f;
 
         protected void Awake()
         {

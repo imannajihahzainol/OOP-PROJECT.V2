@@ -1,56 +1,52 @@
 ﻿using UnityEngine;
-using Assembly_CSharp;
 
 public class Zombie : MonoBehaviour
 {
-    [Header("Zombie Stats")]
-    public int zombieHealth = 1;
-    public float attackRange = 1f;
-    public float attackCooldown = 1.5f;
-    private float lastAttackTime;
-    public bool IsDead;
-
+    [Header("Zombie Settings")]
+    public int maxHealth = 2;
+    protected int currentHealth;
     protected Transform player;
-    protected PlayerMovement playerMovement;
+
+    public virtual void FixedUpdate() { }
+
+    public virtual void ChasePlayer(Transform player) { }
+
+    public bool IsDead
+    {
+        get { return currentHealth <= 0; }
+    }
 
     protected virtual void Start()
     {
-        GameObject p = GameObject.FindGameObjectWithTag("Player");
-        if (p != null)
+        currentHealth = maxHealth;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (player == null)
         {
-            player = p.transform;
-            playerMovement = p.GetComponent<PlayerMovement>();
+            Debug.LogError("Player not found! Make sure the player has the 'Player' tag.");
+        }
+        Debug.Log($"{name} initialized with {currentHealth} health.");
+    }
+
+    public virtual void TakeDamage(int damage)
+    {
+        Debug.Log($"{name} taking {damage} damage. Current health before damage: {currentHealth}");
+        currentHealth -= damage;
+        Debug.Log($"{name} current health after damage: {currentHealth}");
+
+        if (IsDead)
+        {
+            Die();
         }
     }
 
-    protected virtual void FixedUpdate() { }
-
-    // ZOMBIE TAKES DAMAGE
-    public virtual void TakeDamage(int amount)
+    public virtual void Die()
     {
-        zombieHealth -= amount;
-        if (zombieHealth <= 0)
-            Destroy(gameObject);
+        Debug.Log($"{name} died!");
+        Destroy(gameObject);
     }
 
-    // ZOMBIE ATTACK PLAYER
-    public virtual void AttackPlayer()
+    protected virtual void AttackPlayer()
     {
-        if (player == null || playerMovement == null) return;
-
-        float distance = Vector2.Distance(transform.position, player.position);
-
-        if (distance <= attackRange)
-        {
-            if (Time.time - lastAttackTime >= attackCooldown)
-            {
-                playerMovement.TakeDamage(1);   // ✔ using your playerMovement code
-                lastAttackTime = Time.time;
-            }
-        }
-    }
-    public virtual void ChasePlayer(Transform targetPlayer)
-    {
-        // handled in child classes
+        Debug.Log($"{name} is attacking the player.");
     }
 }
