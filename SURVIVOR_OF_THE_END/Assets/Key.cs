@@ -1,22 +1,29 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Key : MonoBehaviour
 {
-    public string playerKeyType;  // jenis key player pegang
+    [Header("Next Scene Settings")]
+    public string nextSceneName; // Assign this in Inspector
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Chest chest = other.GetComponent<Chest>();
-        if (chest != null)
+        if (other.CompareTag("Player"))
         {
-            if (chest.keyType == playerKeyType)
+            Debug.Log("Player collected the key!");
+
+            // Load next scene
+            if (!string.IsNullOrEmpty(nextSceneName))
             {
-                chest.OpenChest();
+                SceneManager.LoadScene(nextSceneName);
             }
             else
             {
-                Debug.Log("Wrong key!");
+                Debug.LogError("Next scene name NOT assigned!");
             }
+
+            Destroy(gameObject);
         }
     }
 }
+
