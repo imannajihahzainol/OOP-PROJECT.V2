@@ -2542,7 +2542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2761a7a45b674d068764f9bccdb8fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossManager
-  survivedUI: {fileID: 1171297474}
 --- !u!4 &594061208
 Transform:
   m_ObjectHideFlags: 0
@@ -12143,12 +12142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4dc51bdaf6eda44fa83035237b428aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossZombie
-  zombieHealth: 5
-  attackRange: 1.5
-  attackCooldown: 1.5
-  IsDead: 0
   maxHealth: 5
+  bossMaxHealth: 5
   attackPower: 1
+  attackRange: 2
+  moveSpeed: 2
   playerSpawnPoint: {fileID: 1220781776}
   oldGrid: {fileID: 2040041165}
   bossGrid: {fileID: 948171520}
@@ -12660,10 +12658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c692c43127a41da42973c1824d88c54e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Zombie
-  zombieHealth: 1
-  attackRange: 1
-  attackCooldown: 1.5
-  IsDead: 0
+  maxHealth: 2
 --- !u!1 &1847707726
 GameObject:
   m_ObjectHideFlags: 0

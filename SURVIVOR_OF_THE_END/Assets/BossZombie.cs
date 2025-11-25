@@ -3,39 +3,47 @@
 public class BossZombie : Zombie
 {
     [Header("Boss Stats")]
-    public int maxHealth = 10;
-    private int currentHealth;
-
+    public int bossMaxHealth = 10;
     public int attackPower = 2;
+    public float attackRange = 1.5f;
+    public float moveSpeed = 2f;
 
     private bool isAwake = false;
 
     [Header("Respawn & Tilemap Reset")]
-    public Transform playerSpawnPoint;    // where the player should return to
-    public GameObject oldGrid;            // your ORIGINAL tilemap grid
-    public GameObject bossGrid;           // tilemap used for boss fight
+    public Transform playerSpawnPoint;
+    public GameObject oldGrid;
+    public GameObject bossGrid;
     public GameObject survived;
 
-    private void OnEnable()
+    private PlayerMovement playerMovement;
+
+    protected override void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerMovement = player.GetComponent<PlayerMovement>();
+        base.Start();
 
+        // Override base health with boss health
+        maxHealth = bossMaxHealth;
         currentHealth = maxHealth;
-        isAwake = true;
 
+        // Cache player & movement script
+        if (player != null)
+            playerMovement = player.GetComponent<PlayerMovement>();
+
+        isAwake = true;
         Debug.Log("Boss Zombie has AWAKENED!");
     }
-
 
     private void OnDisable()
     {
         isAwake = false;
     }
 
-    protected override void FixedUpdate()
+    public override void FixedUpdate()
     {
-        if (!isAwake) return;  // do nothing if inactive
+        if (!isAwake)
+            return;
+
         if (player != null)
         {
             ChasePlayer(player);
@@ -47,74 +55,48 @@ public class BossZombie : Zombie
     {
         if (!isAwake) return;
 
-        currentHealth -= amount;
-        Debug.Log($"Boss Zombie took {amount} damage, HP left: {currentHealth}");
-        if (currentHealth <= 0)
-            Die();
+        base.TakeDamage(amount);   // uses Zombie.cs damage system
     }
 
-    private void Die()
+    protected override void AttackPlayer()
     {
-        Debug.Log("Boss Zombie is dead!");
-        Destroy(gameObject);
-        survived.SetActive(true);
-    }
-
-    public override void AttackPlayer()
-    {
-        if (!isAwake || playerMovement == null) return;
+        if (!isAwake || playerMovement == null)
+            return;
 
         float distance = Vector2.Distance(transform.position, player.position);
+
         if (distance <= attackRange)
         {
             playerMovement.TakeDamage(attackPower);
-            Debug.Log("Boss attacks player for " + attackPower);
-
-            // Check if player is dead
-            if (playerMovement.lives <= 0)
-            {
-                ResetLevel();
-            }
+            Debug.Log($"Boss attacks player for {attackPower}");
         }
     }
-
 
     public override void ChasePlayer(Transform targetPlayer)
     {
         if (!isAwake) return;
 
-        // Example: move directly toward player
-        float speed = 2f;
-        transform.position = Vector2.MoveTowards(transform.position, targetPlayer.position, speed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            targetPlayer.position,
+            moveSpeed * Time.fixedDeltaTime
+        );
 
-        // Flip sprite to face player
+        // Flip sprite
         Vector3 scale = transform.localScale;
-        scale.x = player.position.x > transform.position.x
+        scale.x = (player.position.x > transform.position.x)
                   ? Mathf.Abs(scale.x)
                   : -Mathf.Abs(scale.x);
         transform.localScale = scale;
     }
 
-    private void ResetLevel()
+    public override void Die()
     {
-        Debug.Log("Player died in boss fight — resetting level.");
+        Debug.Log("Boss Zombie is dead!");
 
-        // 1. teleport player to the spawn location
-        player.position = playerSpawnPoint.position;
+        if (survived != null)
+            survived.SetActive(true);
 
-        // 2. switch back tilemaps
-        if (oldGrid != null) oldGrid.SetActive(true);
-        if (bossGrid != null) bossGrid.SetActive(false);
-
-        // 3. reset player size (OPTIONAL)
-        player.localScale = Vector3.one;
-
-        // 4. reset boss
-        this.gameObject.SetActive(false);   // hide boss so it doesn’t attack immediately
-        isAwake = false;
-
-        // OPTIONAL: restore boss HP when reactivated later
-        currentHealth = maxHealth;
-
+        Destroy(gameObject);
     }
 }
