@@ -13,8 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public int lives = 3;
     public int health = 100;
 
-    [Header("Quest Stats")]
+    [Header("Quest Level 2")]
     public int bonesCollected = 0; // Tracks how many bones collected
+    public GameObject questKey;
 
     [Header("Immunity")]
     public bool isImmune = false;        // Potion immunity (for slime only)
@@ -231,48 +232,53 @@ public class PlayerMovement : MonoBehaviour
     // TRIGGERS
     private void OnTriggerEnter2D(Collider2D collision)
     {
-    // --- EXISTING LADDER CODE ---
-    if (collision.CompareTag("Ladder"))
+        if (collision.CompareTag("Ladder"))
             isOnLadder = true;
 
-    // --- FIXED BONE CODE ---
         if (collision.CompareTag("Bone"))
         {
-            // NEW LINE: Turn off the bone's trigger immediately
-            // This prevents your feet and body from BOTH counting it
             collision.enabled = false;
-
             bonesCollected++;
-            Destroy(collision.gameObject, 0.1f); // Destroy with a tiny delay
+            Destroy(collision.gameObject, 0.1f);
 
-            // Update UI
             if (boneText != null)
                 boneText.text = "Bones: " + bonesCollected + "/3";
         }
 
-        // --- DOG SUBMISSION ---
+        // --- UPDATED DOG SUBMISSION LOGIC ---
         if (collision.CompareTag("Dog"))
         {
             if (bonesCollected >= 3)
             {
-                Debug.Log("Woof Woof! (Quest Complete!)");
+                Debug.Log("Quest Complete! Key Spawned.");
+
+                // 1. Update the Text
+                if (boneText != null)
+                    boneText.text = "Here is the key! Good luck!";
+
+                // 2. REVEAL THE HIDDEN KEY
+                if (questKey != null)
+                {
+                    questKey.SetActive(true); // This turns the object ON
+                }
             }
             else
             {
-                Debug.Log("The dog required more bones... You need " + (3 - bonesCollected) + " more bones.");
+                int missing = 3 - bonesCollected;
+                if (boneText != null)
+                    boneText.text = "I need " + missing + " more bones!";
             }
         }
-        // ------------------ NEW CODE FOR PICKUP ------------------
+
+        // ITEM PICKUP
         Item item = collision.GetComponent<Item>();
         if (item != null)
         {
-            // NEW: Use the Collect and Use methods defined in the Item class.
-            item.Collect(); // Mark the item as collected
-            item.Use(this); // Apply the item's effect (which equips the weapon)
-            Destroy(collision.gameObject); // Remove the item from the scene
+            item.Collect();
+            item.Use(this);
+            Destroy(collision.gameObject);
         }
-    
-}
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
