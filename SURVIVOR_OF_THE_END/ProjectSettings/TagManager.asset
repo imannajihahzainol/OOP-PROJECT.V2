@@ -9,6 +9,7 @@ TagManager:
   - fire
   - Slime
   - Bone
+  - BossZombie
   layers:
   - Default
   - TransparentFX
