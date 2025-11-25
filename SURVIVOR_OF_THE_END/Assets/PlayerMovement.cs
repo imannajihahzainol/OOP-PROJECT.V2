@@ -235,12 +235,33 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("Ladder"))
             isOnLadder = true;
 
-        // --- EXISTING BONE CODE ---
-        // ... (Bone code remains the same) ...
+        // --- FIXED BONE CODE ---
+        if (collision.CompareTag("Bone"))
+        {
+            // NEW LINE: Turn off the bone's trigger immediately
+            // This prevents your feet and body from BOTH counting it
+            collision.enabled = false;
 
-        // --- EXISTING DOG SUBMISSION ---
-        // ... (Dog code remains the same) ...
+            bonesCollected++;
+            Destroy(collision.gameObject, 0.1f); // Destroy with a tiny delay
 
+            // Update UI
+            if (boneText != null)
+                boneText.text = "Bones: " + bonesCollected + "/3";
+        }
+
+        // --- DOG SUBMISSION ---
+        if (collision.CompareTag("Dog"))
+        {
+            if (bonesCollected >= 3)
+            {
+                Debug.Log("Woof Woof! (Quest Complete!)");
+            }
+            else
+            {
+                Debug.Log("The dog required more bones... You need " + (3 - bonesCollected) + " more bones.");
+            }
+        }
         // ------------------ NEW CODE FOR PICKUP ------------------
         Item item = collision.GetComponent<Item>();
         if (item != null)
