@@ -1,29 +1,51 @@
 ﻿using UnityEngine;
 
-public class StaticZombie : Zombie
+public class MovingZombie : MonoBehaviour
 {
-    public float detectionRange = 5f;
+    public float speed = 2f;      // Movement speed
+    public float leftLimit = -0f; // Left boundary
+    public float rightLimit = 0f; // Right boundary
+
+    private bool movingRight = true;
 
     void Update()
     {
-        if (player == null) return;
-
-        float distance = Vector2.Distance(transform.position, player.position);
-
-        if (distance <= detectionRange)
+        // Move right
+        if (movingRight)
         {
-            ChasePlayer(player);
-            AttackPlayer(); // Attack when near
+            transform.position += Vector3.right * speed * Time.deltaTime;
+            if (transform.position.x >= rightLimit)
+                movingRight = false;
+        }
+        // Move left
+        else
+        {
+            transform.position += Vector3.left * speed * Time.deltaTime;
+            if (transform.position.x <= leftLimit)
+                movingRight = true;
+        }
+
+        // Flip zombie to face movement direction
+        FlipZombie(movingRight);
+    }
+
+    void FlipZombie(bool movingRight)
+    {
+        if (movingRight)
+        {
+            transform.localScale = new Vector3(
+                Mathf.Abs(transform.localScale.x),
+                transform.localScale.y,
+                transform.localScale.z
+            );
         }
         else
         {
-            GuardArea();
+            transform.localScale = new Vector3(
+                -Mathf.Abs(transform.localScale.x),
+                transform.localScale.y,
+                transform.localScale.z
+            );
         }
-    }
-
-    public void GuardArea()
-
-    {
-        Debug.Log(name + " is guarding its area.");
     }
 }
