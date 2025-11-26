@@ -49,7 +49,7 @@ public class LivesManager : MonoBehaviour
     //    }
     //}
 
-    public void LoseLife(int damage)
+    /*public void LoseLife(int damage)
     {
         currentLives -= damage;
         UpdateUI(); // This deletes the heart visually
@@ -63,6 +63,27 @@ public class LivesManager : MonoBehaviour
         {
             // Still have lives? Respawn!
             // calling your existing Restart/Respawn logic in GameManager
+            GameManager.Instance.RestartLevel();
+        }
+    }*/
+
+    // Inside LivesManager.cs
+
+    public void LoseLife(int damage)
+    {
+        currentLives -= damage;
+        UpdateUI(); // This updates the visual hearts
+
+        if (currentLives <= 0)
+        {
+            // 1. Game Over: Tell the GameManager to display the panel and pause
+            GameManager.Instance.EndGame();
+
+            // We can optionally destroy the player object here if needed, but the Game Over panel should pause the game flow.
+        }
+        else
+        {
+            // 2. Player still has lives: Tell the GameManager to move the player back to the respawn point
             GameManager.Instance.RestartLevel();
         }
     }

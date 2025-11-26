@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
     // -------------------------------------------------------------
     // UNIVERSAL DAMAGE FUNCTION
-    public void TakeDamage(int amount)
+    /*public void TakeDamage(int amount)
     {
         // Block only slime damage through the immune potion
         if (isImmune)
@@ -136,6 +136,35 @@ public class PlayerMovement : MonoBehaviour
         }
 
         StartCoroutine(DamageEffects());
+    }*/
+
+    public void TakeDamage(int amount)
+    {
+        // You must REMOVE the 'lives' variable from this script if it exists here!
+
+        // Block only slime damage through the immune potion
+        if (isImmune)
+        {
+            Debug.Log("Player is immune! Slime damage blocked.");
+            return;
+        }
+
+        // Normal i-frame invincibility still works
+        if (isInvincible) return;
+
+        // --- REMOVE THIS LINE: lives -= amount; ---
+        // --- REMOVE THIS CHECK: if (lives <= 0) { ... } ---
+
+        // 1. Delegate the damage to the central LivesManager
+        if (LivesManager.Instance != null)
+        {
+            LivesManager.Instance.LoseLife(amount);
+        }
+
+        // 2. Start the temporary invincibility/visual effects
+        StartCoroutine(DamageEffects());
+
+        // NOTE: The LivesManager will now handle the Game Over and Respawn logic.
     }
 
 
