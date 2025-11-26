@@ -1,21 +1,41 @@
-using UnityEngine;
-using Assembly_CSharp; // Make sure this matches your namespace
+﻿using UnityEngine;
+using Assembly_CSharp;
 
 public class Sword : Weapons
 {
+
     [Header("Sword Settings")]
     public int swordDamage = 50;       // Damage dealt by the sword
     public float slashSpeed = 1.0f;     // Speed of the slash animation
     public Sprite swordSprite;         // Sprite for the sword (optional, can be loaded from Resources)
-
     [Tooltip("Sudut rotasi Z (dalam darjah) pedang apabila ia dipegang.")]
     public float equippedRotationZ = 90f;
-
-
 
     protected void Awake()
     {
         Initialize("Sword");
+    }
+
+
+    // Tambah di bahagian atas, dalam class Sword
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log($"Sword collided with: {other.gameObject.name}, Tag: {other.tag}");
+
+        if (other.CompareTag("Zombie"))
+        {
+            Zombie zombie = other.GetComponent<Zombie>();
+
+            if (zombie != null && !zombie.IsDead)
+            {
+                zombie.TakeDamage(swordDamage);
+                Debug.Log($"SUCCESS! Sword dealt {swordDamage} damage to {zombie.name}!");
+            }
+            else
+            {
+                Debug.LogWarning("Zombie component not found or zombie is dead!");
+            }
+        }
     }
 
     // Method to attack a zombie
@@ -26,7 +46,6 @@ public class Sword : Weapons
             target.TakeDamage(swordDamage);
             Debug.Log($"Sword dealt {swordDamage} damage to {target.name}!");
         }
-
         // Play slash animation if available
         Animator animator = GetComponent<Animator>();
         if (animator != null)
@@ -39,6 +58,8 @@ public class Sword : Weapons
     // Override the Attack method from the Weapons class
     public override void Attack(Zombie target)
     {
+
+        Debug.Log("Sword slash method called.");
         Slash(target);
     }
 
@@ -59,18 +80,15 @@ public class Sword : Weapons
             weaponHolder.SetParent(player.transform);
             weaponHolder.localPosition = new Vector3(0.5f, 0, 0); // Position at the player's hand
         }
-
         // Clear any existing weapon
         foreach (Transform child in weaponHolder)
         {
             Destroy(child.gameObject);
         }
-
         // Create a visual representation of the sword
         GameObject swordVisual = new GameObject("Sword_Visual");
         swordVisual.transform.SetParent(weaponHolder);
         swordVisual.transform.localPosition = Vector3.zero;
-
         SpriteRenderer swordSpriteRenderer = swordVisual.AddComponent<SpriteRenderer>();
         swordVisual.transform.localRotation = Quaternion.Euler(0, 0, equippedRotationZ);
         if (swordSprite != null)
@@ -92,7 +110,9 @@ public class Sword : Weapons
         }
         swordSpriteRenderer.sortingLayerName = "Player";
         swordSpriteRenderer.sortingOrder = 1;
-
         Debug.Log("Sword equipped visually!");
     }
+
+
+
 }

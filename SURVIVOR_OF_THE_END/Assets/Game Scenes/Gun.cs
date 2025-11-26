@@ -10,7 +10,7 @@ public class Gun : Weapons
     public AudioSource shootSound;
     public Sprite gunSprite;
     [Tooltip("Rotation of the gun when equipped (in degrees).")]
-    public float equippedRotationZ = 0f;
+    public float equippedRotationZ = 270f;
 
     protected void Awake()
     {

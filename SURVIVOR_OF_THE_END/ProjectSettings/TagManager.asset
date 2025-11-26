@@ -12,6 +12,7 @@ TagManager:
   - Dog
   - Weapon
   - BossZombie
+  - Zombie
   layers:
   - Default
   - TransparentFX
@@ -46,6 +47,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Zombie
+    uniqueID: 3863996905
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

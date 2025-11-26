@@ -7,10 +7,6 @@ public class Zombie : MonoBehaviour
     protected int currentHealth;
     protected Transform player;
 
-    public virtual void FixedUpdate() { }
-
-    public virtual void ChasePlayer(Transform player) { }
-
     public bool IsDead
     {
         get { return currentHealth <= 0; }
@@ -27,12 +23,15 @@ public class Zombie : MonoBehaviour
         Debug.Log($"{name} initialized with {currentHealth} health.");
     }
 
+
+
+
+
     public virtual void TakeDamage(int damage)
     {
         Debug.Log($"{name} taking {damage} damage. Current health before damage: {currentHealth}");
         currentHealth -= damage;
         Debug.Log($"{name} current health after damage: {currentHealth}");
-
         if (IsDead)
         {
             Die();
@@ -47,6 +46,10 @@ public class Zombie : MonoBehaviour
 
     protected virtual void AttackPlayer()
     {
-        Debug.Log($"{name} is attacking the player.");
+        
     }
+
+    public virtual void FixedUpdate() { }
+
+    public virtual void ChasePlayer(Transform player) { }
 }
