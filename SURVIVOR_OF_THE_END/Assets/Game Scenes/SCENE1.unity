@@ -982,11 +982,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   maxLives: 3
-  currentLives: 3
-  hearts:
-  - {fileID: 1712594984}
-  - {fileID: 1452417512}
-  - {fileID: 252366274}
+  currentLives: 0
+  hearts: []
 --- !u!1 &158608451
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,13 +2917,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1952424176}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 1952424175}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4798,7 +4795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1039071241
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4876,9 +4873,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   startPanel: {fileID: 0}
   gameOverPanel: {fileID: 0}
-  respawnPoint: {fileID: 5449442274225960162, guid: 32e4ca33b0926f34fbac3a918df84830, type: 3}
+  respawnPoint: {fileID: 0}
   levels: []
-  currentLevel: 0
+  currentLevel: 1
   isGameOver: 0
 --- !u!4 &1039080179 stripped
 Transform:
@@ -8205,8 +8202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c96035ac4579f2847bf4e76d96f3d88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  startPanel: {fileID: 1052451208}
-  gameOverPanel: {fileID: 1039071240}
+  startPanel: {fileID: 0}
+  gameOverPanel: {fileID: 0}
   respawnPoint: {fileID: 0}
   levels: []
   currentLevel: 1

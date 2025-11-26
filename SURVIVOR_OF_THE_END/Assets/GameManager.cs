@@ -219,7 +219,7 @@ public class GameManager : MonoBehaviour
     }
 }*/
 
-using GameSystem;
+//using GameSystem;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
