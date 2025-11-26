@@ -140,8 +140,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        // You must REMOVE the 'lives' variable from this script if it exists here!
-
         // Block only slime damage through the immune potion
         if (isImmune)
         {
@@ -152,9 +150,6 @@ public class PlayerMovement : MonoBehaviour
         // Normal i-frame invincibility still works
         if (isInvincible) return;
 
-        // --- REMOVE THIS LINE: lives -= amount; ---
-        // --- REMOVE THIS CHECK: if (lives <= 0) { ... } ---
-
         // 1. Delegate the damage to the central LivesManager
         if (LivesManager.Instance != null)
         {
@@ -163,8 +158,6 @@ public class PlayerMovement : MonoBehaviour
 
         // 2. Start the temporary invincibility/visual effects
         StartCoroutine(DamageEffects());
-
-        // NOTE: The LivesManager will now handle the Game Over and Respawn logic.
     }
 
 
@@ -187,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Respawn point position: " + respawnPoint.position);
         Debug.Log("Moving player to: " + respawnPoint.position);
-        lives = 3;
+        //lives = 3;
         transform.position = respawnPoint.position;
         rb.linearVelocity = Vector2.zero;
         StartCoroutine(DamageEffects());

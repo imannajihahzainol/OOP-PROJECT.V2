@@ -66,9 +66,11 @@ public class GameManager : MonoBehaviour
         // 2. Show ONLY the Game Over Panel
         if (startPanel != null) startPanel.SetActive(false);
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
+
+        Debug.Log("Game Over! Panel Display Attempted.");
     }
 
-    // This is the function LivesManager needs to call for respawn
+    // function LivesManager needs to call for respawn
     public void RestartLevel()
     {
         if (isGameOver) return;
@@ -89,6 +91,16 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Cannot Respawn! Missing Player, RespawnPoint, and Level list.");
         }
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f; // Unpause the game before reloading
+
+        // Reloads the currently active scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene(
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
+        );
     }
 
     public void QuitGame()

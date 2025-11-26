@@ -67,9 +67,8 @@ public class LivesManager : MonoBehaviour
         }
     }*/
 
-    // Inside LivesManager.cs
 
-    public void LoseLife(int damage)
+    /*public void LoseLife(int damage)
     {
         currentLives -= damage;
         UpdateUI(); // This updates the visual hearts
@@ -85,6 +84,55 @@ public class LivesManager : MonoBehaviour
         {
             // 2. Player still has lives: Tell the GameManager to move the player back to the respawn point
             GameManager.Instance.RestartLevel();
+        }
+    }*/
+
+    /*public void LoseLife(int damage)
+    {
+        currentLives -= damage;
+        UpdateUI();
+
+        Debug.Log("Life Lost. Current Lives: " + currentLives);
+
+        if (currentLives <= 0)
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.EndGame();
+            }
+        }
+        else
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.RestartLevel();
+            }
+        }
+    }*/
+
+    public void LoseLife(int damage)
+    {
+        // 1. DEDUCT LIFE and UPDATE UI (CRITICAL FIX)
+        currentLives -= damage; // <--- THIS LINE MUST BE PRESENT
+        UpdateUI();             // <--- THIS LINE MUST BE PRESENT
+
+        Debug.Log("Life Lost. Current Lives: " + currentLives);
+
+        if (currentLives <= 0)
+        {
+            // 2. TRIGGER GAME OVER
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.EndGame();
+            }
+        }
+        else
+        {
+            // 3. TRIGGER RESPAWN
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.RestartLevel();
+            }
         }
     }
 

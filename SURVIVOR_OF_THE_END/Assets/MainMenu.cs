@@ -14,9 +14,20 @@ public class MainMenu : MonoBehaviour
     }
 
     // Call this function when "Exit" or "End" is clicked
+    /*public void QuitGame()
+    {
+        Debug.Log("QUIT GAME!"); 
+        Application.Quit();      
+    }*/
+
     public void QuitGame()
     {
-        Debug.Log("QUIT GAME!"); // This shows in the editor so you know it works
-        Application.Quit();      // This closes the actual game window (built version)
+        Debug.Log("Quitting Game...");
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
