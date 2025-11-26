@@ -5126,6 +5126,10 @@ PrefabInstance:
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 1039080179}
+    - target: {fileID: 7396767864089550748, guid: c2e93da5960f2eb4683c13010b9ff776, type: 3}
+      propertyPath: currentWeapon
+      value: 
+      objectReference: {fileID: 1698389552}
     - target: {fileID: 8017098342222087873, guid: c2e93da5960f2eb4683c13010b9ff776, type: 3}
       propertyPath: m_Name
       value: mc
@@ -7227,8 +7231,8 @@ MonoBehaviour:
   itemType: 
   isCollected: 0
   boosterDuration: 3
-  speedIncrease: 5
-  jumpIncrease: 5
+  speedIncrease: 3
+  jumpIncrease: 3
 --- !u!1 &1603277964
 GameObject:
   m_ObjectHideFlags: 0
@@ -7751,6 +7755,17 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.3, y: 0.52}
   m_Direction: 0
+--- !u!114 &1698389552 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -8090360929477581439, guid: c89e676f0c99559479cd243f091ae0fc, type: 3}
+  m_PrefabInstance: {fileID: 5827684583236939762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc8531438a58dc4d89e57cf09c3596d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gun
 --- !u!1 &1750722384
 GameObject:
   m_ObjectHideFlags: 0

@@ -5447,7 +5447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99931760b3cb62d41a59051e7fd1c663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Key
-  nextSceneName: 
+  nextSceneName: FINALLEVEL
 --- !u!1 &557678042
 GameObject:
   m_ObjectHideFlags: 0
