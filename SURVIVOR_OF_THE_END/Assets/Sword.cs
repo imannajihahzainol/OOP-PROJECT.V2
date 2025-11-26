@@ -113,6 +113,20 @@ public class Sword : Weapons
         Debug.Log("Sword equipped visually!");
     }
 
+    // Inside Sword.cs
+
+    public void ActivateHitbox()
+    {
+        // If you had animation, this is where you'd trigger it.
+        // Without animation, this is where you'd manually ENABLE the Collider.
+
+        // For now, let's log to confirm the call worked:
+        Debug.Log("Sword Hitbox Activation called!");
+
+        // If you want the Collider to only be active during the attack:
+        // GetComponent<Collider2D>().enabled = true;
+        // You would then need to disable it after a short delay (e.g., 0.1s).
+    }
 
 
 }
