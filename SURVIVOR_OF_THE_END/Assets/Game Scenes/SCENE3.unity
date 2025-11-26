@@ -3365,6 +3365,7 @@ MonoBehaviour:
   keyType: 
   hasItem: 1
   itemPrefab: {fileID: 5243112707857456523, guid: 2c962d3524542c240b8584b1123e3ba7, type: 3}
+  spawnOffsetY: 0.5
   animator: {fileID: 0}
 --- !u!61 &388444703
 BoxCollider2D:

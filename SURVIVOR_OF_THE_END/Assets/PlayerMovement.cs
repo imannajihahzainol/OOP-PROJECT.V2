@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
         controls.Player.Jump.performed += ctx => jump();
-        controls.Player.Attack.performed += ctx => attack();
+        controls.Player.Attack.performed += ctx => Attack();
 
         groundLayer = LayerMask.NameToLayer("Ground");
         playerLayer = gameObject.layer;
@@ -100,15 +100,41 @@ public class PlayerMovement : MonoBehaviour
 
     // -------------------------------------------------------------
     // ATTACK
-    public void attack()
+    private void Attack()
     {
-        if (isAttacking) return;
-
-        isAttacking = true;
-        Debug.Log("Player Attacked!");
-        Invoke(nameof(_resetAttack), 0.5f);
+        if (currentWeapon != null && !isAttacking)
+        {
+            Zombie target = FindNearestZombie();
+            if (target != null)
+            {
+                currentWeapon.Attack(target);
+            }
+            else
+            {
+                Debug.Log("No target found!");
+            }
+        }
     }
 
+    private Zombie FindNearestZombie()
+    {
+        Zombie[] zombies = FindObjectsOfType<Zombie>();
+        Zombie nearestZombie = null;
+        float shortestDistance = Mathf.Infinity;
+
+        foreach (Zombie zombie in zombies)
+        {
+            float distanceToZombie = Vector3.Distance(transform.position, zombie.transform.position);
+            if (distanceToZombie < shortestDistance)
+            {
+                shortestDistance = distanceToZombie;
+                nearestZombie = zombie;
+            }
+        }
+
+        Debug.Log("Nearest zombie: " + (nearestZombie != null ? nearestZombie.name : "None"));
+        return nearestZombie;
+    }
     private void _resetAttack() => isAttacking = false;
 
     // -------------------------------------------------------------
@@ -136,19 +162,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         StartCoroutine(DamageEffects());
-    }
-
-
-    // -------------------------------------------------------------
-    // SPECIAL SLIME DAMAGE FUNCTION (uses isImmune)
-    public void TakeSlimeDamage(int amount)
-    {
-        if (isImmune)
-        {
-            Debug.Log("Slime damage ignored (IMMUNE!)");
-            return;
-        }
-        TakeDamage(amount);
     }
 
 
