@@ -11,8 +11,9 @@ namespace Assembly_CSharp
         public override void ApplyEffect(PlayerMovement player)
         {
             if (player == null) return;
-            player.Heal(healAmount);
+            LivesManager.Instance.HealLife(healAmount);
             Debug.Log($"Heal Potion used! Restored {healAmount} health.");
+
         }
     }
 }
