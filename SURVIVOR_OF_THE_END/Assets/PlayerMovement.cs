@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     public Weapons currentWeapon;
     public Transform respawnPoint;
 
+    [Header("Attack Settings")]
+    public float attackRange = 2f;  // Add this line
+    public LayerMask zombieLayer;
     // ---------------- PLAYER STATS ----------------
     [Header("Player Stats")]
     public int lives = 3;
@@ -98,45 +101,55 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // -------------------------------------------------------------
-    // ATTACK
     public void attack()
+
     {
-        if (isAttacking) return;
+
+        if (isAttacking || currentWeapon == null) return;
 
         isAttacking = true;
-        Debug.Log("Player Attacked!");
+
+        // Determine attack direction based on where player is facing
+        Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+
+        // Shoot a raycast in that direction
+        RaycastHit2D hit = Physics2D.Raycast(
+            transform.position,           // Start from player position
+            attackDirection,              // Direction player is facing
+            attackRange,                  // How far to check
+            LayerMask.GetMask("Zombie")   // Only hit zombies
+        );
+
+        if (hit.collider != null)
+        {
+            Debug.Log($"Raycast hit: {hit.collider.name}");
+            Zombie zombie = hit.collider.GetComponent<Zombie>();
+
+            if (zombie != null && !zombie.IsDead)
+            {
+                currentWeapon.Attack(zombie);
+                Debug.Log($"Attacked {zombie.name}!");
+            }
+        }
+        else
+        {
+            Debug.Log("Raycast missed - no zombie in that direction");
+        }
+
         Invoke(nameof(_resetAttack), 0.5f);
     }
 
-    private void _resetAttack() => isAttacking = false;
-
-    // -------------------------------------------------------------
-    // UNIVERSAL DAMAGE FUNCTION
-    /*public void TakeDamage(int amount)
+    // Visualize the raycast in Unity Editor
+    private void OnDrawGizmosSelected()
     {
-        // Block only slime damage through the immune potion
-        if (isImmune)
-        {
-            Debug.Log("Player is immune! Slime damage blocked.");
-            return;
-        }
-
-        // Normal i-frame invincibility still works
-        if (isInvincible) return;
-
-        lives -= amount;
-        Debug.Log("Player took damage! Lives left: " + lives);
-
-        if (lives <= 0)
-        {
-            Debug.Log("Player died!");
-            Respawn();
-            return;
-        }
-
-        StartCoroutine(DamageEffects());
-    }*/
+        Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, direction * attackRange);
+    }
+    private void _resetAttack()
+    {
+        isAttacking = false;
+    }
 
     public void TakeDamage(int amount)
     {
