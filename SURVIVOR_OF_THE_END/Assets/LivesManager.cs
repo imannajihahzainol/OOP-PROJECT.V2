@@ -11,12 +11,7 @@ public class LivesManager : MonoBehaviour
     [Header("UI References")]
     public GameObject[] hearts; // Move your hearts array here!
 
-    //private void Start()
-    //{
-    //    // Initialize the hearts immediately when game loads
-    //    currentLives = maxLives;
-    //    UpdateUI();
-    //}
+   
 
     private void Awake()
     {
@@ -37,78 +32,7 @@ public class LivesManager : MonoBehaviour
         UpdateUI();
     }
 
-    //public void LoseLife(int damage)
-    //{
-    //    currentLives -= damage;
-    //    UpdateUI();
-
-    //    if (currentLives <= 0)
-    //    {
-    //        // Tell the Boss (GameManager) that we died
-    //        GameManager.Instance.EndGame();
-    //    }
-    //}
-
-    /*public void LoseLife(int damage)
-    {
-        currentLives -= damage;
-        UpdateUI(); // This deletes the heart visually
-
-        if (currentLives <= 0)
-        {
-            // No lives left? Game Over.
-            GameManager.Instance.EndGame();
-        }
-        else
-        {
-            // Still have lives? Respawn!
-            // calling your existing Restart/Respawn logic in GameManager
-            GameManager.Instance.RestartLevel();
-        }
-    }*/
-
-
-    /*public void LoseLife(int damage)
-    {
-        currentLives -= damage;
-        UpdateUI(); // This updates the visual hearts
-
-        if (currentLives <= 0)
-        {
-            // 1. Game Over: Tell the GameManager to display the panel and pause
-            GameManager.Instance.EndGame();
-
-            // We can optionally destroy the player object here if needed, but the Game Over panel should pause the game flow.
-        }
-        else
-        {
-            // 2. Player still has lives: Tell the GameManager to move the player back to the respawn point
-            GameManager.Instance.RestartLevel();
-        }
-    }*/
-
-    /*public void LoseLife(int damage)
-    {
-        currentLives -= damage;
-        UpdateUI();
-
-        Debug.Log("Life Lost. Current Lives: " + currentLives);
-
-        if (currentLives <= 0)
-        {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.EndGame();
-            }
-        }
-        else
-        {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.RestartLevel();
-            }
-        }
-    }*/
+   
 
     public void LoseLife(int damage)
     {
