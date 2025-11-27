@@ -16,7 +16,7 @@ public class BossZombie : Zombie
     public GameObject bossGrid;
     public GameObject survived;
 
-    private PlayerMovement playerMovement;
+    private Player playerMovement;                                   
 
     protected override void Start()
     {
@@ -28,7 +28,7 @@ public class BossZombie : Zombie
 
         // Cache player & movement script
         if (player != null)
-            playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement = player.GetComponent<Player>();
 
         isAwake = true;
         Debug.Log("Boss Zombie has AWAKENED!");

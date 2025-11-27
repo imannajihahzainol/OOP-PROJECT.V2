@@ -63,7 +63,7 @@ public class RunningZombie : Zombie
     {
         if (other.CompareTag("Player"))
         {
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            Player player = other.GetComponent<Player>();
             if (player != null)
             {
                 player.TakeDamage(1);

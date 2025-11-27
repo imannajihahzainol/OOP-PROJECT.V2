@@ -50,7 +50,7 @@ public class MovingZombie : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player detected!");
-            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+            Player player = collision.gameObject.GetComponent<Player>();
             if (player != null)
             {
                 player.TakeDamage(1);

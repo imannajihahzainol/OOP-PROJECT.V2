@@ -14,7 +14,7 @@ namespace Assembly_CSharp
             Initialize("Booster Potion");
         }
 
-        public override void ApplyEffect(PlayerMovement player)
+        public override void ApplyEffect(Player player)
         {
             if (player == null)
             {

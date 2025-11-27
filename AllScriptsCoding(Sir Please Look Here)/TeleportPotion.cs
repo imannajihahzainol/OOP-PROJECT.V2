@@ -11,7 +11,7 @@ namespace Assembly_CSharp
             Initialize("Teleport Potion");
         }
 
-        public override void ApplyEffect(PlayerMovement player)
+        public override void ApplyEffect(Player player)
         {
             if (player == null || teleportTarget == null) return;
 
@@ -22,7 +22,7 @@ namespace Assembly_CSharp
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            Player player = other.GetComponent<Player>();
             if (player != null)
             {
                 ApplyEffect(player);

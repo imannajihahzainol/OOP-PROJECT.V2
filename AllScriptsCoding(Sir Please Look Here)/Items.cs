@@ -20,7 +20,7 @@ namespace Assembly_CSharp
             isCollected = true;
         }
 
-        public void Use(PlayerMovement player)
+        public void Use(Player player)
         {
             if (!isCollected || player == null)
                 return;
@@ -45,7 +45,7 @@ namespace Assembly_CSharp
             base.Initialize(name, type);
         }
 
-        public abstract void ApplyEffect(PlayerMovement player);
+        public abstract void ApplyEffect(Player player);
     }
 
 
@@ -60,7 +60,7 @@ namespace Assembly_CSharp
 
         public abstract void Attack(Zombie target);
 
-        public virtual void Equip(PlayerMovement player)
+        public virtual void Equip(Player player)
         {
             player.currentWeapon = this;
             Debug.Log($"Equipped weapon: {itemName}");

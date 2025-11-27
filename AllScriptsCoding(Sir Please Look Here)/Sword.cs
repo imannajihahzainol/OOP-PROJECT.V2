@@ -64,14 +64,14 @@ public class Sword : Weapons
     }
 
     // Override the Equip method to handle visuals
-    public override void Equip(PlayerMovement player)
+    public override void Equip(Player player)
     {
         base.Equip(player);
         EquipVisually(player);
     }
 
     // Method to visually equip the sword to the player
-    private void EquipVisually(PlayerMovement player)
+    private void EquipVisually(Player player)
     {
         Transform weaponHolder = player.transform.Find("WeaponHolder");
         if (weaponHolder == null)
