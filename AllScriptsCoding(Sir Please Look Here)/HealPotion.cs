@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Assembly_CSharp
 {
-    public class Heal : Potion
+    public class HealPotion : Potion
     {
         public int healAmount = 1;
 

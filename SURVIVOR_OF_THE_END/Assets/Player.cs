@@ -1,0 +1,386 @@
+using Assembly_CSharp;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
+
+public class Player : MonoBehaviour
+{
+    public Weapons currentWeapon;
+    public Transform respawnPoint;
+
+    [Header("Attack Settings")]
+    public float attackRange = 2f;  // Add this line
+    public LayerMask zombieLayer;
+    // ---------------- PLAYER STATS ----------------
+    [Header("Player Stats")]
+    public int lives = 3;
+    public int health = 100;
+
+    [Header("Quest Level 2")]
+    public int bonesCollected = 0; // Tracks how many bones collected
+    public GameObject questKey;
+
+    [Header("Immunity")]
+    public bool isImmune = false;        // Potion immunity (for slime only)
+    public float immunityTimer = 0f;
+
+    // ---------------- DAMAGE SYSTEM ----------------
+    [Header("Damage Settings")]
+    public float invincibilityDuration = 1f; // i-frames after taking damage
+    public float knockbackForce = 5f;
+    public float flashSpeed = 0.1f;
+
+    private bool isInvincible = false;     // i-frame system
+    private SpriteRenderer spriteRenderer;
+
+    // ---------------- MOVEMENT ----------------
+    [Header("Movement Settings")]
+    public float moveSpeed = 5f;
+    public float jumpForce = 10f;
+    public float climbSpeed = 3f;
+
+    // ---------------- GROUND CHECK ----------------
+    [Header("Ground Check Settings")]
+    public Transform groundCheck;
+    public float checkRadius = 0.2f;
+    public LayerMask whatIsGround;
+
+    private Rigidbody2D rb;
+    private PlayerControls controls;
+    private Vector2 moveInput;
+
+    public bool isGrounded;
+    private bool isAttacking;
+    private bool isClimbing = false;
+    private bool isOnLadder = false;
+    private float originalGravity;
+
+    private int groundLayer;
+    private int playerLayer;
+    public TextMeshProUGUI boneText;
+
+    // -------------------------------------------------------------
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalGravity = rb.gravityScale;
+
+        controls = new PlayerControls();
+        controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+        controls.Player.Jump.performed += ctx => jump();
+        controls.Player.Attack.performed += ctx => attack();
+
+        groundLayer = LayerMask.NameToLayer("Ground");
+        playerLayer = gameObject.layer;
+    }
+
+    void OnEnable() => controls.Player.Enable();
+    void OnDisable() => controls.Player.Disable();
+
+    // -------------------------------------------------------------
+    // BASIC MOVEMENT
+    public void moveLeft()
+    {
+        rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
+        transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+    }
+
+    public void moveRight()
+    {
+        rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+    }
+
+    public void jump()
+    {
+        if (isGrounded && !isClimbing)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
+    }
+
+    public void attack()
+
+    {
+
+        if (isAttacking || currentWeapon == null) return;
+
+        isAttacking = true;
+
+        // Determine attack direction based on where player is facing
+        Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+
+        // Shoot a raycast in that direction
+        RaycastHit2D hit = Physics2D.Raycast(
+            transform.position,           // Start from player position
+            attackDirection,              // Direction player is facing
+            attackRange,                  // How far to check
+            LayerMask.GetMask("Zombie")   // Only hit zombies
+        );
+
+        if (hit.collider != null)
+        {
+            Debug.Log($"Raycast hit: {hit.collider.name}");
+            Zombie zombie = hit.collider.GetComponent<Zombie>();
+
+            if (zombie != null && !zombie.IsDead)
+            {
+                currentWeapon.Attack(zombie);
+                Debug.Log($"Attacked {zombie.name}!");
+            }
+        }
+        else
+        {
+            Debug.Log("Raycast missed - no zombie in that direction");
+        }
+
+        Invoke(nameof(_resetAttack), 0.5f);
+    }
+
+    // Visualize the raycast in Unity Editor
+    private void OnDrawGizmosSelected()
+    {
+        Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, direction * attackRange);
+    }
+    private void _resetAttack()
+    {
+        isAttacking = false;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        // Block only slime damage through the immune potion
+        if (isImmune)
+        {
+            Debug.Log("Player is immune! Slime damage blocked.");
+            return;
+        }
+
+        // Normal i-frame invincibility still works
+        if (isInvincible) return;
+
+        // 1. Delegate the damage to the central LivesManager
+        if (LivesManager.Instance != null)
+        {
+            LivesManager.Instance.LoseLife(amount);
+        }
+
+        // 2. Start the temporary invincibility/visual effects
+        StartCoroutine(DamageEffects());
+    }
+
+
+    // -------------------------------------------------------------
+    // SPECIAL SLIME DAMAGE FUNCTION (uses isImmune)
+    public void TakeSlimeDamage(int amount)
+    {
+        if (isImmune)
+        {
+            Debug.Log("Slime damage ignored (IMMUNE!)");
+            return;
+        }
+        TakeDamage(amount);
+    }
+
+
+    // -------------------------------------------------------------
+    // RESPAWN SYSTEM
+    public void Respawn()
+    {
+        Debug.Log("Respawn point position: " + respawnPoint.position);
+        Debug.Log("Moving player to: " + respawnPoint.position);
+        //lives = 3;
+        transform.position = respawnPoint.position;
+        rb.linearVelocity = Vector2.zero;
+        StartCoroutine(DamageEffects());
+    }
+
+    // -------------------------------------------------------------
+    // DAMAGE EFFECTS / I-FRAMES
+    private System.Collections.IEnumerator DamageEffects()
+    {
+        isInvincible = true;
+
+        float direction = transform.localScale.x > 0 ? -1 : 1;
+        rb.linearVelocity = new Vector2(direction * knockbackForce, rb.linearVelocity.y);
+
+        for (float i = 0; i < invincibilityDuration; i += flashSpeed * 2)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(flashSpeed);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(flashSpeed);
+        }
+
+        isInvincible = false;
+    }
+
+    // -------------------------------------------------------------
+    void FixedUpdate() => HandleMovement();
+
+    private void HandleMovement()
+    {
+        // LADDER
+        if (isOnLadder && Mathf.Abs(moveInput.y) > 0.1f)
+        {
+            isClimbing = true;
+            rb.gravityScale = 0f;
+            rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, moveInput.y * climbSpeed);
+            Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, true);
+            return;
+        }
+
+        if (isClimbing && isOnLadder)
+        {
+            rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, 0f);
+            return;
+        }
+
+        // NORMAL
+        isClimbing = false;
+        rb.gravityScale = originalGravity;
+
+        Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, false);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+
+        if (moveInput.x > 0.1f) moveRight();
+        else if (moveInput.x < -0.1f) moveLeft();
+        else rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+
+        // IMMUNITY TIMER UPDATE
+        if (isImmune)
+        {
+            immunityTimer -= Time.deltaTime;
+            if (immunityTimer <= 0)
+            {
+                isImmune = false;
+                Debug.Log("Immunity expired.");
+            }
+        }
+    }
+
+    // -------------------------------------------------------------
+    // TRIGGERS
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+            isOnLadder = true;
+
+        if (collision.CompareTag("Bone"))
+        {
+            collision.enabled = false;
+            bonesCollected++;
+            Destroy(collision.gameObject, 0.1f);
+
+            if (boneText != null)
+                boneText.text = "Bones: " + bonesCollected + "/3";
+        }
+
+        // --- UPDATED DOG SUBMISSION LOGIC ---
+        if (collision.CompareTag("Dog"))
+        {
+            if (bonesCollected >= 3)
+            {
+                Debug.Log("Quest Complete! Key Spawned.");
+
+                // 1. Update the Text
+                if (boneText != null)
+                    boneText.text = "Here is the key! Good luck!";
+
+                // 2. REVEAL THE HIDDEN KEY
+                if (questKey != null)
+                {
+                    questKey.SetActive(true); // This turns the object ON
+                }
+            }
+            else
+            {
+                int missing = 3 - bonesCollected;
+                if (boneText != null)
+                    boneText.text = "I need " + missing + " more bones!";
+            }
+        }
+
+        // ITEM PICKUP
+        Item item = collision.GetComponent<Item>();
+        if (item != null)
+        {
+            item.Collect();
+            item.Use(this);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            isOnLadder = false;
+            isClimbing = false;
+            rb.gravityScale = originalGravity;
+            Physics2D.IgnoreLayerCollision(playerLayer, groundLayer, false);
+        }
+    }
+
+    // -------------------------------------------------------------
+    // ITEM SYSTEM
+    public void PickUpItem(Item item)
+    {
+        if (item != null)
+            Debug.Log("Picked up: " + item.itemName);
+    }
+
+    public void ApplyItemEffect(Item item)
+    {
+        if (item is Potion potion)
+        {
+            potion.ApplyEffect(this);
+        }
+        else if (item is Weapons weapon)
+        {
+            weapon.Equip(this);
+        }
+    }
+
+    // POTION EFFECTS --------------------------------
+    public void Heal(int amount)
+    {
+        health = Mathf.Min(100, health + amount);
+        Debug.Log("Player Healed: " + health);
+    }
+
+    public void IncreaseSpeed(float amount)
+    {
+        moveSpeed += amount;
+        Debug.Log("Speed Increased: " + moveSpeed);
+    }
+
+    public void IncreaseJump(float amount)
+    {
+        jumpForce += amount;
+        Debug.Log("Jump Increased: " + jumpForce);
+    }
+
+    public void IncreaseSize(float amount)
+    {
+        transform.localScale += new Vector3(amount, amount, 0);
+        Debug.Log("Player Size Increased");
+    }
+
+    // IMMUNITY EFFECT
+    public void SetImmunity(bool value, float duration)
+    {
+        isImmune = value;
+
+        if (value)
+        {
+            immunityTimer = duration;
+            Debug.Log("IMMUNITY ACTIVATED!");
+        }
+        else Debug.Log("IMMUNITY OFF");
+    }
+}

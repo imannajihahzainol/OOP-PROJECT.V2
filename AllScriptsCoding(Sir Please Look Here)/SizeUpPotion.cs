@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SizePotion : MonoBehaviour
+public class SizeUpPotion : MonoBehaviour
 {
     public float sizeMultiplier = 1.5f;
     public LevelManager levelManager; // assign in Inspector

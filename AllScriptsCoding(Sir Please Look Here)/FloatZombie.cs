@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FloatingZombie : Zombie
+public class FloatZombie : Zombie
 {
     [Header("Floating Zombie Settings")]
     public float floatHeight = 0.5f;

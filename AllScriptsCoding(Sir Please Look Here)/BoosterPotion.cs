@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Assembly_CSharp
 {
-    public class Booster : Potion
+    public class BoosterPotion : Potion
     {
         public float boosterDuration = 3f;
         [Header("Boost Values")]

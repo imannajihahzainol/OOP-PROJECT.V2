@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public Weapons currentWeapon;
     public Transform respawnPoint;
