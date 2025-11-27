@@ -8,7 +8,7 @@ namespace Assembly_CSharp
 
         protected void Awake() => Initialize("Heal Potion");
 
-        public override void ApplyEffect(PlayerMovement player)
+        public override void ApplyEffect(Player player)
         {
             if (player == null) return;
             LivesManager.Instance.HealLife(healAmount);

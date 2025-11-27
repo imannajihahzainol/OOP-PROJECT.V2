@@ -6,7 +6,7 @@ public class WaterDamage : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            Player player = other.GetComponent<Player>();
             if (player != null)
             {
                 if (player.isImmune)

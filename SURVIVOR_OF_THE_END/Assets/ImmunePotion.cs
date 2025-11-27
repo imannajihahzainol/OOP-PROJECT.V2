@@ -11,7 +11,7 @@ namespace Assembly_CSharp
             Initialize("Immunity Potion");
         }
 
-        public override void ApplyEffect(PlayerMovement player)
+        public override void ApplyEffect(Player player)
         {
             if (player == null) return;
             player.SetImmunity(true, immunityDuration);

@@ -16,7 +16,7 @@ public class ThornTrap : MonoBehaviour
         {
             canDamage = false;
 
-            PlayerMovement player = collision.GetComponent<PlayerMovement>();
+            Player player = collision.GetComponent<Player>();
             if (player != null)
             {
                 Debug.Log("Thorn Trap hit player for 1 life!");

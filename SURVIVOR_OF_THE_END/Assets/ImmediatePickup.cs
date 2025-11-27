@@ -22,7 +22,7 @@ public class ImmediatePickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // 2. Get the PlayerMovement script from the player object.
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            Player player = other.GetComponent<Player>();
 
             if (player != null)
             {
@@ -40,7 +40,7 @@ public class ImmediatePickup : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Player object is missing the PlayerMovement script!");
+                Debug.LogError("Player object is missing the Player script!");
             }
         }
     }

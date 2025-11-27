@@ -47,14 +47,14 @@ public class Gun : Weapons
         Shoot(target);
     }
 
-    public override void Equip(PlayerMovement player)
+    public override void Equip(Player player)
     {
         base.Equip(player);
         Debug.Log("Gun equipped visually.");
         EquipVisually(player);
     }
 
-    private void EquipVisually(PlayerMovement player)
+    private void EquipVisually(Player player)
     {
         Transform weaponHolder = player.transform.Find("WeaponHolder");
         if (weaponHolder == null)
